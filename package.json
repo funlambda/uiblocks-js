@@ -1,0 +1,8 @@
+{
+  "name": "uiblocks-js",
+  "version": "1.0.0",
+  "description": "UI Blocks for JS (Redux)",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
+}
