@@ -1,21 +1,22 @@
 // @flow
 
 const React = require('react');
+import type { Model } from '../blocks/array';
 
-function mkView(inner: (model: any) => React$Element): (model: any) => React$Element {
-  function main(model: any){
+function mkView<InnerModel>(inner: (model: InnerModel) => React$Element): (model: Model<InnerModel>) => React$Element {
+  function main(model: Model<InnerModel>){
     return (
       <div>
         <h2>Array</h2>
-        {model.rows.map(r => (
-          <div>
-            {inner(r.inner)}
-            <button onClick={r.onRemove}>Remove</button>
-          </div>
-        ))}
         <div>
           <button onClick={model.onAdd}>Add</button>
         </div>
+        {model.rows.map(r => (
+          <div>
+            <button style={{display: "inline-block"}} onClick={r.onRemove}>X</button>
+            {inner(r.inner)}
+          </div>
+        ))}
       </div>
     );
   }

@@ -1,8 +1,9 @@
 // @flow
 
 const React = require('react');
+import type { Model } from '../blocks/counter';
 
-function main(model: any){
+function main(model: Model){
   return (
     <div>
       Current Value!: {model.value}

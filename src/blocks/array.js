@@ -1,27 +1,35 @@
 // @flow
 
-type init = null
-type state<InnerState> = Array<InnerState>
-type action<InnerAction> =
+import { mk } from './block';
+import type { Block } from './block';
+
+export type Init<InnerInit> = Array<InnerInit>
+export type State<InnerState> = Array<InnerState>
+export type Action<InnerAction> =
   { type: "Add" }
   | { type: "Edit", index: number, action: InnerAction }
   | { type: "Remove", index: number}
-type model<InnerModel> =
+export type Model<InnerModel> =
   {
     rows: Array<{ inner: InnerModel, onRemove: () => void}>,
     onAdd: () => void
   }
+export type Value<InnerValue> =
+  Array<InnerValue>
 
+function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>(
+    innerInitForNew: InnerInit,
+    innerBlock: Block<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>)
+    : Block<Init, State<InnerState>, Action<InnerAction>, Model<InnerModel>, Value<InnerValue>> {
 
-function mkBlock<InnerState, InnerAction, InnerModel>(innerBlock: { initialize: (x: null) => InnerState, handle: (s: InnerState, a: InnerAction) => InnerState, viewModel: (s: InnerState, d: (x: InnerAction) => void) => InnerModel }): any {
-  function initialize(init: init): state {
-    return [];
+  function initialize(init: Init<InnerInit>): State {
+    return init.map(innerBlock.initialize);
   }
 
-  function handle(state: state, action: action): state {
+  function handle(state: State, action: Action): State {
     switch (action.type) {
       case 'Add':
-        const newInnerState = innerBlock.initialize(null);
+        const newInnerState = innerBlock.initialize(innerInitForNew);
         return [...state, newInnerState];
       case 'Edit':
         const oldInnerState = state[action.index];
@@ -40,7 +48,7 @@ function mkBlock<InnerState, InnerAction, InnerModel>(innerBlock: { initialize: 
     }
   }
 
-  function viewModel(state: state, dispatch: (a: action) => void): model {
+  function viewModel(state: State, dispatch: (a: Action) => void): Model {
     return {
       rows: state.map((x,i) => {
         return {
@@ -53,7 +61,11 @@ function mkBlock<InnerState, InnerAction, InnerModel>(innerBlock: { initialize: 
     }
   }
 
-  return { initialize, handle, viewModel };
+  function readValue(state: State): Value {
+    return state.map(x => innerBlock.readValue(x));
+  }
+
+  return mk(initialize, handle, viewModel, readValue);
 }
 
 module.exports = mkBlock;

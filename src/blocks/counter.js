@@ -1,20 +1,23 @@
 // @flow
 
-type init = null
-type state = number
-type action = "Increment" | "Decrement"
-type model = {
+import type { Block } from './block';
+
+type Init = null
+type State = number
+type Action = "Increment" | "Decrement"
+export type Model = {
   value: number,
   onIncrement: () => void,
   onDecrement: () => void
 }
+type Value = number
 
-function initialize(init: init): state {
+function initialize(init: Init): State {
   console.log("initialize");
   return 0;
 }
 
-function handle(state: state, action: action): state {
+function handle(state: State, action: Action): State {
   switch (action) {
     case 'Increment':
       return state + 1
@@ -25,7 +28,7 @@ function handle(state: state, action: action): state {
   }
 }
 
-function viewModel(state: state, dispatch: (a: action) => void): model {
+function viewModel(state: State, dispatch: (a: Action) => void): Model {
   return {
     value: state,
     onIncrement: () => dispatch("Increment"),
@@ -33,4 +36,11 @@ function viewModel(state: state, dispatch: (a: action) => void): model {
   }
 }
 
-module.exports = { initialize, handle, viewModel };
+function readValue(state: State): Value {
+  return state;
+}
+
+const block: Block<Init, State, Action, Model, Value> =
+  { initialize, handle, viewModel, readValue };
+
+module.exports = block;

@@ -1,20 +1,24 @@
 // @flow
 
-type init = null
-type state = string
-type action =
+import type { Option } from './option';
+import type { Block } from './block';
+
+type Init = string
+type State = string
+type Action =
   { type: "Change", value: string }
   | { type: "Dummy" }
-type model = {
+export type Model = {
   value: string,
   onChange: (x: string) => void
 }
+type Value = string
 
-function initialize(init: init): state {
-  return "";
+function initialize(init: Init): State {
+  return init;
 }
 
-function handle(state: state, action: action): state {
+function handle(state: State, action: Action): State {
   switch (action.type) {
     case 'Change':
       console.log("change");
@@ -25,11 +29,17 @@ function handle(state: state, action: action): state {
   }
 }
 
-function viewModel(state: state, dispatch: (a: action) => void): model {
+function viewModel(state: State, dispatch: (a: Action) => void): Model {
   return {
     value: state,
     onChange: (txt: string) => dispatch({ type: "Change", value: txt })
   }
 }
 
-module.exports = { initialize, handle, viewModel };
+function readValue(state: State): Value {
+  return state;
+}
+
+const block: Block<Init, State, Action, Model, Value> = { initialize, handle, viewModel, readValue };
+
+module.exports = block;
