@@ -3,8 +3,8 @@
 const React = require('react');
 import type { Model } from '../blocks/value';
 
-function mkView<InnerValue, InnerModel>(inner: (model: InnerModel) => React$Element): (model: Model<InnerValue, InnerModel>) => React$Element {
-  function main(model: Model<InnerValue, InnerModel>){
+function mkView<InnerModel, InnerValue>(inner: (model: InnerModel) => React$Element): (model: Model<InnerModel, InnerValue>) => React$Element {
+  function main(model: Model<InnerModel, InnerValue>){
     return (
       <span>
         {inner(model.Inner)}

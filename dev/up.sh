@@ -1,4 +1,5 @@
-cd ..
+cd ~/Development/uiblocks-js/
+
 babel src/ --watch --out-dir out/ &
 watchify out/client.js -o public/main.js &
 
