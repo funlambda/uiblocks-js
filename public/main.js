@@ -19621,7 +19621,7 @@ function warning(message) {
 },{}],168:[function(require,module,exports){
 'use strict';
 
-var _block = require('./block');
+var _block = require('../uiblocks-core/block');
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -19676,53 +19676,15 @@ function mkBlock(innerInitForNew, innerBlock) {
 }
 
 module.exports = mkBlock;
-},{"./block":169}],169:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.mk = mk;
-exports.adaptInit = adaptInit;
-exports.adaptValue = adaptValue;
-function mk(initialize, handle, viewModel, readValue) {
-
-  return { initialize: initialize, handle: handle, viewModel: viewModel, readValue: readValue };
-}
-
-function adaptInit(adapter, block) {
-
-  return {
-    initialize: function initialize(init) {
-      return block.initialize(adapter(init));
-    },
-    handle: block.handle,
-    viewModel: block.viewModel,
-    readValue: block.readValue
-  };
-}
-
-function adaptValue(adapter, block) {
-
-  return {
-    initialize: block.initialize,
-    handle: block.handle,
-    viewModel: block.viewModel,
-    readValue: function readValue(state) {
-      var value = block.readValue(state);
-      return adapter(value);
-    }
-  };
-}
-},{}],170:[function(require,module,exports){
+},{"../uiblocks-core/block":176}],169:[function(require,module,exports){
 'use strict';
 
-var _block = require('./block');
+var _block = require('../uiblocks-core/block');
 
-var option = require("./option");
+var option = require("../uiblocks-core/option");
 
 
-function mkBlock(innerBlock, allowSubmit) {
+function mkBlock(innerBlock, config) {
 
   function initialize(init) {
     return { type: "Editing", inner: innerBlock.initialize(init) };
@@ -19740,12 +19702,16 @@ function mkBlock(innerBlock, allowSubmit) {
       case 'Submit':
         switch (state.type) {
           case 'Editing':
-            var result = allowSubmit(innerBlock.readValue(state.inner));
+            var result = config.allowSubmit(innerBlock.readValue(state.inner));
             switch (result.type) {
               case 'Some':
                 return { type: "Submitted", value: result.value };
               case 'None':
-                return { type: "Editing", inner: state.inner };
+                var actions = config.actionsOnSubmitFail.map(function (a) {
+                  return { type: "Inner", action: a };
+                });
+
+                return { type: "Editing", inner: state.inner }; // send back actions
               default:
                 throw "unexpected";
             }
@@ -19796,14 +19762,21 @@ function mkBlock(innerBlock, allowSubmit) {
 }
 
 module.exports = mkBlock;
-},{"./block":169,"./option":172}],171:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/option":177}],170:[function(require,module,exports){
 'use strict';
+
+var _block = require('../uiblocks-core/block');
+
+var block = _interopRequireWildcard(_block);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var option = require("../uiblocks-core/option");
+
 
 var textEditor = require("./textEditor");
 var array = require("./array");
 var value = require("./value");
-var option = require("./option");
-var block = require("./block");
 var record = require("./record");
 var touched = require("./touched");
 var form = require("./form");
@@ -19943,40 +19916,15 @@ var block4 = block.adaptInit(option.map(function (x) {
 // Option<Person> -> Validated<Person>
 var block5 = value(block4);
 // Option<Person> -> Option<Person>
-var block6 = form(block5, validatedToOption);
+var block6 = form(block5, { allowSubmit: validatedToOption, actionsOnSubmitFail: [{ type: "one", action: { type: "Touch" } }, { type: "two", action: { type: "Touch" } }] });
 
 module.exports = block.adaptInit(function (x) {
   return option.None;
 }, block6); // null -> Option<Person>
-},{"./array":168,"./block":169,"./form":170,"./option":172,"./record":173,"./textEditor":174,"./touched":175,"./value":176}],172:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Some = Some;
-exports.map = map;
-var None = exports.None = { type: "None" };
-function Some(value) {
-  return { type: "Some", value: value };
-}
-
-function map(f) {
-  return function (x) {
-    switch (x.type) {
-      case "None":
-        return { type: "None" };
-      case "Some":
-        return { type: "Some", value: f(x.value) };
-      default:
-        return { type: "None" };
-    }
-  };
-}
-},{}],173:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/option":177,"./array":168,"./form":169,"./record":171,"./textEditor":172,"./touched":173,"./value":174}],171:[function(require,module,exports){
 'use strict';
 
-var _block = require('./block');
+var _block = require('../uiblocks-core/block');
 
 function mkBlock(innerBlock1, innerBlock2) {
 
@@ -20011,8 +19959,10 @@ function mkBlock(innerBlock1, innerBlock2) {
 }
 
 module.exports = mkBlock;
-},{"./block":169}],174:[function(require,module,exports){
+},{"../uiblocks-core/block":176}],172:[function(require,module,exports){
 'use strict';
+
+var _block = require('../uiblocks-core/block');
 
 function initialize(init) {
   return init;
@@ -20045,10 +19995,10 @@ function readValue(state) {
 var block = { initialize: initialize, handle: handle, viewModel: viewModel, readValue: readValue };
 
 module.exports = block;
-},{}],175:[function(require,module,exports){
+},{"../uiblocks-core/block":176}],173:[function(require,module,exports){
 'use strict';
 
-var _block = require('./block');
+var _block = require('../uiblocks-core/block');
 
 function mkBlock(innerBlock) {
 
@@ -20093,10 +20043,10 @@ function mkBlock(innerBlock) {
 }
 
 module.exports = mkBlock;
-},{"./block":169}],176:[function(require,module,exports){
+},{"../uiblocks-core/block":176}],174:[function(require,module,exports){
 'use strict';
 
-var _block = require('./block');
+var _block = require('../uiblocks-core/block');
 
 function mkBlock(innerBlock) {
 
@@ -20111,7 +20061,7 @@ function mkBlock(innerBlock) {
 }
 
 module.exports = mkBlock;
-},{"./block":169}],177:[function(require,module,exports){
+},{"../uiblocks-core/block":176}],175:[function(require,module,exports){
 "use strict";
 
 var _redux = require("redux");
@@ -20145,7 +20095,70 @@ renderState(store.getState());
 store.subscribe(function () {
   renderState(store.getState());
 });
-},{"./blocks/main":171,"./views/main":181,"react-dom":31,"redux":166}],178:[function(require,module,exports){
+},{"./blocks/main":170,"./views/main":181,"react-dom":31,"redux":166}],176:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mk = mk;
+exports.adaptInit = adaptInit;
+exports.adaptValue = adaptValue;
+function mk(initialize, handle, viewModel, readValue) {
+
+  return { initialize: initialize, handle: handle, viewModel: viewModel, readValue: readValue };
+}
+
+function adaptInit(adapter, block) {
+
+  return {
+    initialize: function initialize(init) {
+      return block.initialize(adapter(init));
+    },
+    handle: block.handle,
+    viewModel: block.viewModel,
+    readValue: block.readValue
+  };
+}
+
+function adaptValue(adapter, block) {
+
+  return {
+    initialize: block.initialize,
+    handle: block.handle,
+    viewModel: block.viewModel,
+    readValue: function readValue(state) {
+      var value = block.readValue(state);
+      return adapter(value);
+    }
+  };
+}
+},{}],177:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Some = Some;
+exports.map = map;
+var None = exports.None = { type: "None" };
+function Some(value) {
+  return { type: "Some", value: value };
+}
+
+function map(f) {
+  return function (x) {
+    switch (x.type) {
+      case "None":
+        return { type: "None" };
+      case "Some":
+        return { type: "Some", value: f(x.value) };
+      default:
+        return { type: "None" };
+    }
+  };
+}
+},{}],178:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20476,4 +20489,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[177]);
+},{}]},{},[175]);

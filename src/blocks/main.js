@@ -1,13 +1,14 @@
 // @flow
 
-import type { Block } from './block';
-import type { Option } from './option';
+import * as block from '../uiblocks-core/block';
+import type { Block } from '../uiblocks-core/block';
+
+const option = require("../uiblocks-core/option");
+import type { Option } from "../uiblocks-core/option";
 
 const textEditor = require("./textEditor");
 const array = require("./array");
 const value = require("./value");
-const option = require("./option");
-const block = require("./block");
 const record = require("./record");
 const touched = require("./touched");
 const form = require("./form");
@@ -161,6 +162,6 @@ const block4 = block.adaptInit(option.map((x: Person) => [x.name, x.age]), block
 // Option<Person> -> Validated<Person>
 const block5 = value(block4);
 // Option<Person> -> Option<Person>
-const block6 = form(block5, validatedToOption);
+const block6 = form(block5, { allowSubmit: validatedToOption, actionsOnSubmitFail: [ { type: "one", action: { type: "Touch" } }, { type: "two", action: { type: "Touch" } } ]});
 
 module.exports = block.adaptInit((x: null) => option.None, block6); // null -> Option<Person>

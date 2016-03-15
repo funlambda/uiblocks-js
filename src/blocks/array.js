@@ -1,7 +1,7 @@
 // @flow
 
-import { mk } from './block';
-import type { Block } from './block';
+import { mk } from '../uiblocks-core/block';
+import type { Block } from '../uiblocks-core/block';
 
 export type Init<InnerInit> = Array<InnerInit>
 export type State<InnerState> = Array<InnerState>

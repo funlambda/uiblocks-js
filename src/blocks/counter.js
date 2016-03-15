@@ -1,6 +1,7 @@
 // @flow
 
-import type { Block } from './block';
+import { mk } from '../uiblocks-core/block';
+import type { Block } from '../uiblocks-core/block';
 
 type Init = null
 type State = number

@@ -1,7 +1,7 @@
 // @flow
 
-import type { Option } from './option';
-import type { Block } from './block';
+import { mk } from '../uiblocks-core/block';
+import type { Block } from '../uiblocks-core/block';
 
 type Init = string
 type State = string

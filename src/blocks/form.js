@@ -1,9 +1,10 @@
 // @flow
 
-import { mk } from './block';
-import type { Block } from './block';
-const option = require("./option");
-import type { Option } from './option';
+import { mk } from '../uiblocks-core/block';
+import type { Block } from '../uiblocks-core/block';
+
+const option = require("../uiblocks-core/option");
+import type { Option } from "../uiblocks-core/option";
 
 export type State<InnerState, a> =
   { type: "Editing", inner: InnerState }
@@ -17,9 +18,14 @@ export type Model<InnerModel, a> =
 export type Value<a> =
   Option<a>
 
+type Config<InnerAction, InnerValue, a> = {
+  allowSubmit: (x: InnerValue) => Option<a>,
+  actionsOnSubmitFail: Array<InnerAction>
+}
+
 function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue, a>(
     innerBlock: Block<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>,
-    allowSubmit: (x: InnerValue) => Option<a>)
+    config: Config<InnerAction, InnerValue, a>)
     : Block<InnerInit, State<InnerState, a>, Action<InnerAction>, Model<InnerModel, a>, Value<a>> {
 
   function initialize(init: InnerInit): State<InnerState, a> {
@@ -38,12 +44,14 @@ function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue, a>(
       case 'Submit':
         switch (state.type) {
           case 'Editing':
-            const result = allowSubmit(innerBlock.readValue(state.inner));
+            const result = config.allowSubmit(innerBlock.readValue(state.inner));
             switch (result.type){
               case 'Some':
                 return { type: "Submitted", value: result.value };
               case 'None':
-                return { type: "Editing", inner: state.inner };
+                const actions = config.actionsOnSubmitFail.map(a => ({ type: "Inner", action: a }));
+
+                return { type: "Editing", inner: state.inner }; // send back actions
               default: throw "unexpected";
             }
           default: throw "unexpected";

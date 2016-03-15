@@ -1,7 +1,7 @@
 // @flow
 
-import type { Block } from './block';
-import { mk } from './block';
+import { mk } from '../uiblocks-core/block';
+import type { Block } from '../uiblocks-core/block';
 
 export type Model<InnerModel, InnerValue> = {
   Inner: InnerModel,
