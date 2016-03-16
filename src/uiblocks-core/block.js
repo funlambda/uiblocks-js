@@ -1,15 +1,17 @@
 // @flow
 
+import type { InitResult } from './init-result';
+
 export type Block<Init, State, Action, Model, Value> = {
-  initialize: (init: Init) => State,
-  handle: (state: State, action: Action) => State,
+  initialize: (init: Init) => InitResult<State, Action>,
+  handle: (state: State, action: Action) => InitResult<State, Action>,
   viewModel: (state: State, dispatch: (a: Action) => void) => Model,
   readValue: (state: State) => Value
 }
 
 export function mk<Init, State, Action, Model, Value>(
-    initialize: (init: Init) => State,
-    handle: (state: State, action: Action) => State,
+    initialize: (init: Init) => InitResult<State, Action>,
+    handle: (state: State, action: Action) => InitResult<State, Action>,
     viewModel: (state: State, dispatch: (a: Action) => void) => Model,
     readValue: (state: State) => Value): Block<Init, State, Action, Model, Value> {
 

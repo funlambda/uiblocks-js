@@ -1,7 +1,9 @@
 // @flow
 
-import { mk } from '../uiblocks-core/block';
 import type { Block } from '../uiblocks-core/block';
+import type { InitResult } from '../uiblocks-core/init-result';
+import * as block from '../uiblocks-core/block';
+import * as initResult from '../uiblocks-core/init-result';
 
 type Init = null
 type State = number
@@ -13,19 +15,19 @@ export type Model = {
 }
 type Value = number
 
-function initialize(init: Init): State {
+function initialize(init: Init): InitResult<State, Action> {
   console.log("initialize");
-  return 0;
+  return initResult.mk(0);
 }
 
-function handle(state: State, action: Action): State {
+function handle(state: State, action: Action): InitResult<State, Action> {
   switch (action) {
     case 'Increment':
-      return state + 1
+      return initResult.mk(state + 1);
     case 'Decrement':
-      return state - 1
+      return initResult.mk(state - 1);
     default:
-      return state
+      return initResult.mk(state);
   }
 }
 
@@ -41,7 +43,4 @@ function readValue(state: State): Value {
   return state;
 }
 
-const block: Block<Init, State, Action, Model, Value> =
-  { initialize, handle, viewModel, readValue };
-
-module.exports = block;
+module.exports = block.mk(initialize, handle, viewModel, readValue);

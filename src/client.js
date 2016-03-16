@@ -6,15 +6,33 @@ const ReactDOM = require("react-dom");
 import { createStore } from 'redux'
 
 function reducer(state, action){
+  console.log("action:", action);
+
   if (action.type == "blah"){
-    return block.handle(state, action.action);
+    const result = block.handle(state, action.action);
+    console.log("result", result);
+
+    // TODO: Do this more cleanly (a bit hackish as-is)
+    window.setTimeout(
+      () =>
+        result.actions.map(a =>
+          store.dispatch({ type: 'blah', action: a })
+        ),
+      50);
+
+    return result.state;
   } else {
     return state;
   }
 }
 
-let initState = block.initialize(null);
-let store = createStore(reducer, initState);
+let result = block.initialize(null);
+console.log("initial result", result);
+let store = createStore(reducer, result.state);
+
+result.actions.map(a =>
+  store.dispatch({ type: 'blah', action: a })
+);
 
 function renderState(state){
   const model = block.viewModel(state, a => store.dispatch({ type: 'blah', action: a }));

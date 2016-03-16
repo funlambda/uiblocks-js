@@ -1,7 +1,9 @@
 // @flow
 
-import { mk } from '../uiblocks-core/block';
 import type { Block } from '../uiblocks-core/block';
+import type { InitResult } from '../uiblocks-core/init-result';
+import * as block from '../uiblocks-core/block';
+import * as initResult from '../uiblocks-core/init-result';
 
 export type State<InnerState> = {
   Inner: InnerState,
@@ -20,27 +22,35 @@ function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>(
     innerBlock: Block<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>)
     : Block<InnerInit, State<InnerState>, Action<InnerAction>, Model<InnerModel>, InnerValue> {
 
-  function initialize(init: InnerInit): State {
-    return {
-      Inner: innerBlock.initialize(init),
-      IsTouched: false
-    };
+  function initialize(init: InnerInit): InitResult<State, Action> {
+    const innerResult = innerBlock.initialize(init);
+
+    return initResult.map(
+      s => ({
+        Inner: s,
+        IsTouched: false
+      }),
+      a => ({ type: "Inner", action: a })
+    )(innerResult);
   }
 
-  function handle(state: State, action: Action<InnerAction>): State {
+  function handle(state: State, action: Action<InnerAction>): InitResult<State, Action> {
     switch (action.type) {
       case "Inner":
-        return {
-          Inner: innerBlock.handle(state.Inner, action.action),
-          IsTouched: true
-        };
+        const _action = action.action;
+        return initResult.map(
+          s => ({
+            Inner: s,
+            IsTouched: true
+          }),
+          a => ({ type: "Inner", action: a })
+        )(innerBlock.handle(state.Inner, _action));
       case "Touch":
-        return {
+        return initResult.mk({
           Inner: state.Inner,
           IsTouched: true
-        };
-      default:
-        return state;
+        });
+      default: throw "unexpected";
     }
   }
 
@@ -55,7 +65,7 @@ function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>(
     return innerBlock.readValue(state.Inner);
   }
 
-  return mk(initialize, handle, viewModel, readValue);
+  return block.mk(initialize, handle, viewModel, readValue);
 }
 
 module.exports = mkBlock;

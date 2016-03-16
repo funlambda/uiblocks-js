@@ -85,7 +85,7 @@ var EventListener = {
 
 module.exports = EventListener;
 }).call(this,require('_process'))
-},{"./emptyFunction":8,"_process":186}],2:[function(require,module,exports){
+},{"./emptyFunction":8,"_process":187}],2:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -425,7 +425,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
 module.exports = createNodesFromMarkup;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":2,"./createArrayFromMixed":6,"./getMarkupWrap":12,"./invariant":16,"_process":186}],8:[function(require,module,exports){
+},{"./ExecutionEnvironment":2,"./createArrayFromMixed":6,"./getMarkupWrap":12,"./invariant":16,"_process":187}],8:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -487,7 +487,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":186}],10:[function(require,module,exports){
+},{"_process":187}],10:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -648,7 +648,7 @@ function getMarkupWrap(nodeName) {
 
 module.exports = getMarkupWrap;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":2,"./invariant":16,"_process":186}],13:[function(require,module,exports){
+},{"./ExecutionEnvironment":2,"./invariant":16,"_process":187}],13:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -814,7 +814,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":186}],17:[function(require,module,exports){
+},{"_process":187}],17:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -915,7 +915,7 @@ var keyMirror = function (obj) {
 
 module.exports = keyMirror;
 }).call(this,require('_process'))
-},{"./invariant":16,"_process":186}],20:[function(require,module,exports){
+},{"./invariant":16,"_process":187}],20:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -1205,7 +1205,7 @@ function toArray(obj) {
 
 module.exports = toArray;
 }).call(this,require('_process'))
-},{"./invariant":16,"_process":186}],27:[function(require,module,exports){
+},{"./invariant":16,"_process":187}],27:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -1265,7 +1265,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":8,"_process":186}],28:[function(require,module,exports){
+},{"./emptyFunction":8,"_process":187}],28:[function(require,module,exports){
 /**
  * Checks if `value` is a host object in IE < 9.
  *
@@ -2151,7 +2151,7 @@ ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {
 
 module.exports = CSSPropertyOperations;
 }).call(this,require('_process'))
-},{"./CSSProperty":34,"./ReactPerf":102,"./dangerousStyleValue":136,"_process":186,"fbjs/lib/ExecutionEnvironment":2,"fbjs/lib/camelizeStyleName":4,"fbjs/lib/hyphenateStyleName":15,"fbjs/lib/memoizeStringOnly":22,"fbjs/lib/warning":27}],36:[function(require,module,exports){
+},{"./CSSProperty":34,"./ReactPerf":102,"./dangerousStyleValue":136,"_process":187,"fbjs/lib/ExecutionEnvironment":2,"fbjs/lib/camelizeStyleName":4,"fbjs/lib/hyphenateStyleName":15,"fbjs/lib/memoizeStringOnly":22,"fbjs/lib/warning":27}],36:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -2247,7 +2247,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./PooledClass":54,"_process":186,"fbjs/lib/invariant":16}],37:[function(require,module,exports){
+},{"./Object.assign":53,"./PooledClass":54,"_process":187,"fbjs/lib/invariant":16}],37:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -2725,7 +2725,7 @@ ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {
 
 module.exports = DOMChildrenOperations;
 }).call(this,require('_process'))
-},{"./Danger":42,"./ReactMultiChildUpdateTypes":98,"./ReactPerf":102,"./setInnerHTML":155,"./setTextContent":156,"_process":186,"fbjs/lib/invariant":16}],40:[function(require,module,exports){
+},{"./Danger":42,"./ReactMultiChildUpdateTypes":98,"./ReactPerf":102,"./setInnerHTML":155,"./setTextContent":156,"_process":187,"fbjs/lib/invariant":16}],40:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -2962,7 +2962,7 @@ var DOMProperty = {
 
 module.exports = DOMProperty;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/invariant":16}],41:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/invariant":16}],41:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -3190,7 +3190,7 @@ ReactPerf.measureMethods(DOMPropertyOperations, 'DOMPropertyOperations', {
 
 module.exports = DOMPropertyOperations;
 }).call(this,require('_process'))
-},{"./DOMProperty":40,"./ReactPerf":102,"./quoteAttributeValueForBrowser":153,"_process":186,"fbjs/lib/warning":27}],42:[function(require,module,exports){
+},{"./DOMProperty":40,"./ReactPerf":102,"./quoteAttributeValueForBrowser":153,"_process":187,"fbjs/lib/warning":27}],42:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -3338,7 +3338,7 @@ var Danger = {
 
 module.exports = Danger;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/ExecutionEnvironment":2,"fbjs/lib/createNodesFromMarkup":7,"fbjs/lib/emptyFunction":8,"fbjs/lib/getMarkupWrap":12,"fbjs/lib/invariant":16}],43:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/ExecutionEnvironment":2,"fbjs/lib/createNodesFromMarkup":7,"fbjs/lib/emptyFunction":8,"fbjs/lib/getMarkupWrap":12,"fbjs/lib/invariant":16}],43:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -3866,7 +3866,7 @@ var EventPluginHub = {
 
 module.exports = EventPluginHub;
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":47,"./EventPluginUtils":48,"./ReactErrorUtils":87,"./accumulateInto":133,"./forEachAccumulated":141,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],47:[function(require,module,exports){
+},{"./EventPluginRegistry":47,"./EventPluginUtils":48,"./ReactErrorUtils":87,"./accumulateInto":133,"./forEachAccumulated":141,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],47:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -4089,7 +4089,7 @@ var EventPluginRegistry = {
 
 module.exports = EventPluginRegistry;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/invariant":16}],48:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/invariant":16}],48:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -4294,7 +4294,7 @@ var EventPluginUtils = {
 
 module.exports = EventPluginUtils;
 }).call(this,require('_process'))
-},{"./EventConstants":45,"./ReactErrorUtils":87,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],49:[function(require,module,exports){
+},{"./EventConstants":45,"./ReactErrorUtils":87,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],49:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -4432,7 +4432,7 @@ var EventPropagators = {
 
 module.exports = EventPropagators;
 }).call(this,require('_process'))
-},{"./EventConstants":45,"./EventPluginHub":46,"./accumulateInto":133,"./forEachAccumulated":141,"_process":186,"fbjs/lib/warning":27}],50:[function(require,module,exports){
+},{"./EventConstants":45,"./EventPluginHub":46,"./accumulateInto":133,"./forEachAccumulated":141,"_process":187,"fbjs/lib/warning":27}],50:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -4896,7 +4896,7 @@ var LinkedValueUtils = {
 
 module.exports = LinkedValueUtils;
 }).call(this,require('_process'))
-},{"./ReactPropTypeLocations":104,"./ReactPropTypes":105,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],53:[function(require,module,exports){
+},{"./ReactPropTypeLocations":104,"./ReactPropTypes":105,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],53:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -5066,7 +5066,7 @@ var PooledClass = {
 
 module.exports = PooledClass;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/invariant":16}],55:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/invariant":16}],55:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5146,7 +5146,7 @@ var ReactBrowserComponentMixin = {
 
 module.exports = ReactBrowserComponentMixin;
 }).call(this,require('_process'))
-},{"./ReactInstanceMap":93,"./findDOMNode":139,"_process":186,"fbjs/lib/warning":27}],57:[function(require,module,exports){
+},{"./ReactInstanceMap":93,"./findDOMNode":139,"_process":187,"fbjs/lib/warning":27}],57:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5596,7 +5596,7 @@ var ReactChildReconciler = {
 
 module.exports = ReactChildReconciler;
 }).call(this,require('_process'))
-},{"./ReactReconciler":107,"./instantiateReactComponent":149,"./shouldUpdateReactComponent":157,"./traverseAllChildren":158,"_process":186,"fbjs/lib/warning":27}],59:[function(require,module,exports){
+},{"./ReactReconciler":107,"./instantiateReactComponent":149,"./shouldUpdateReactComponent":157,"./traverseAllChildren":158,"_process":187,"fbjs/lib/warning":27}],59:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6553,7 +6553,7 @@ var ReactClass = {
 
 module.exports = ReactClass;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./ReactComponent":61,"./ReactElement":83,"./ReactNoopUpdateQueue":100,"./ReactPropTypeLocationNames":103,"./ReactPropTypeLocations":104,"_process":186,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/keyMirror":19,"fbjs/lib/keyOf":20,"fbjs/lib/warning":27}],61:[function(require,module,exports){
+},{"./Object.assign":53,"./ReactComponent":61,"./ReactElement":83,"./ReactNoopUpdateQueue":100,"./ReactPropTypeLocationNames":103,"./ReactPropTypeLocations":104,"_process":187,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/keyMirror":19,"fbjs/lib/keyOf":20,"fbjs/lib/warning":27}],61:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6678,7 +6678,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactComponent;
 }).call(this,require('_process'))
-},{"./ReactNoopUpdateQueue":100,"./canDefineProperty":135,"_process":186,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],62:[function(require,module,exports){
+},{"./ReactNoopUpdateQueue":100,"./canDefineProperty":135,"_process":187,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],62:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -6774,7 +6774,7 @@ var ReactComponentEnvironment = {
 
 module.exports = ReactComponentEnvironment;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/invariant":16}],64:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/invariant":16}],64:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -7471,7 +7471,7 @@ var ReactCompositeComponent = {
 
 module.exports = ReactCompositeComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./ReactComponentEnvironment":63,"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactInstanceMap":93,"./ReactPerf":102,"./ReactPropTypeLocationNames":103,"./ReactPropTypeLocations":104,"./ReactReconciler":107,"./ReactUpdateQueue":113,"./shouldUpdateReactComponent":157,"_process":186,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],65:[function(require,module,exports){
+},{"./Object.assign":53,"./ReactComponentEnvironment":63,"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactInstanceMap":93,"./ReactPerf":102,"./ReactPropTypeLocationNames":103,"./ReactPropTypeLocations":104,"./ReactReconciler":107,"./ReactUpdateQueue":113,"./shouldUpdateReactComponent":157,"_process":187,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],65:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -7597,7 +7597,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":65,"./ReactDOMTextComponent":77,"./ReactDefaultInjection":80,"./ReactInstanceHandles":92,"./ReactMount":96,"./ReactPerf":102,"./ReactReconciler":107,"./ReactUpdates":114,"./ReactVersion":115,"./findDOMNode":139,"./renderSubtreeIntoContainer":154,"_process":186,"fbjs/lib/ExecutionEnvironment":2,"fbjs/lib/warning":27}],67:[function(require,module,exports){
+},{"./ReactCurrentOwner":65,"./ReactDOMTextComponent":77,"./ReactDefaultInjection":80,"./ReactInstanceHandles":92,"./ReactMount":96,"./ReactPerf":102,"./ReactReconciler":107,"./ReactUpdates":114,"./ReactVersion":115,"./findDOMNode":139,"./renderSubtreeIntoContainer":154,"_process":187,"fbjs/lib/ExecutionEnvironment":2,"fbjs/lib/warning":27}],67:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -8613,7 +8613,7 @@ assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mix
 
 module.exports = ReactDOMComponent;
 }).call(this,require('_process'))
-},{"./AutoFocusUtils":32,"./CSSPropertyOperations":35,"./DOMProperty":40,"./DOMPropertyOperations":41,"./EventConstants":45,"./Object.assign":53,"./ReactBrowserEventEmitter":57,"./ReactComponentBrowserEnvironment":62,"./ReactDOMButton":67,"./ReactDOMInput":72,"./ReactDOMOption":73,"./ReactDOMSelect":74,"./ReactDOMTextarea":78,"./ReactMount":96,"./ReactMultiChild":97,"./ReactPerf":102,"./ReactUpdateQueue":113,"./canDefineProperty":135,"./escapeTextContentForBrowser":138,"./isEventSupported":150,"./setInnerHTML":155,"./setTextContent":156,"./validateDOMNesting":159,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/keyOf":20,"fbjs/lib/shallowEqual":25,"fbjs/lib/warning":27}],69:[function(require,module,exports){
+},{"./AutoFocusUtils":32,"./CSSPropertyOperations":35,"./DOMProperty":40,"./DOMPropertyOperations":41,"./EventConstants":45,"./Object.assign":53,"./ReactBrowserEventEmitter":57,"./ReactComponentBrowserEnvironment":62,"./ReactDOMButton":67,"./ReactDOMInput":72,"./ReactDOMOption":73,"./ReactDOMSelect":74,"./ReactDOMTextarea":78,"./ReactMount":96,"./ReactMultiChild":97,"./ReactPerf":102,"./ReactUpdateQueue":113,"./canDefineProperty":135,"./escapeTextContentForBrowser":138,"./isEventSupported":150,"./setInnerHTML":155,"./setTextContent":156,"./validateDOMNesting":159,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/keyOf":20,"fbjs/lib/shallowEqual":25,"fbjs/lib/warning":27}],69:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -8793,7 +8793,7 @@ var ReactDOMFactories = mapObject({
 
 module.exports = ReactDOMFactories;
 }).call(this,require('_process'))
-},{"./ReactElement":83,"./ReactElementValidator":84,"_process":186,"fbjs/lib/mapObject":21}],70:[function(require,module,exports){
+},{"./ReactElement":83,"./ReactElementValidator":84,"_process":187,"fbjs/lib/mapObject":21}],70:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -8909,7 +8909,7 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 
 module.exports = ReactDOMIDOperations;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":39,"./DOMPropertyOperations":41,"./ReactMount":96,"./ReactPerf":102,"_process":186,"fbjs/lib/invariant":16}],72:[function(require,module,exports){
+},{"./DOMChildrenOperations":39,"./DOMPropertyOperations":41,"./ReactMount":96,"./ReactPerf":102,"_process":187,"fbjs/lib/invariant":16}],72:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -9065,7 +9065,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMInput;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":52,"./Object.assign":53,"./ReactDOMIDOperations":71,"./ReactMount":96,"./ReactUpdates":114,"_process":186,"fbjs/lib/invariant":16}],73:[function(require,module,exports){
+},{"./LinkedValueUtils":52,"./Object.assign":53,"./ReactDOMIDOperations":71,"./ReactMount":96,"./ReactUpdates":114,"_process":187,"fbjs/lib/invariant":16}],73:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -9157,7 +9157,7 @@ var ReactDOMOption = {
 
 module.exports = ReactDOMOption;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./ReactChildren":59,"./ReactDOMSelect":74,"_process":186,"fbjs/lib/warning":27}],74:[function(require,module,exports){
+},{"./Object.assign":53,"./ReactChildren":59,"./ReactDOMSelect":74,"_process":187,"fbjs/lib/warning":27}],74:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -9348,7 +9348,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMSelect;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":52,"./Object.assign":53,"./ReactMount":96,"./ReactUpdates":114,"_process":186,"fbjs/lib/warning":27}],75:[function(require,module,exports){
+},{"./LinkedValueUtils":52,"./Object.assign":53,"./ReactMount":96,"./ReactUpdates":114,"_process":187,"fbjs/lib/warning":27}],75:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -9718,7 +9718,7 @@ assign(ReactDOMTextComponent.prototype, {
 
 module.exports = ReactDOMTextComponent;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":39,"./DOMPropertyOperations":41,"./Object.assign":53,"./ReactComponentBrowserEnvironment":62,"./ReactMount":96,"./escapeTextContentForBrowser":138,"./setTextContent":156,"./validateDOMNesting":159,"_process":186}],78:[function(require,module,exports){
+},{"./DOMChildrenOperations":39,"./DOMPropertyOperations":41,"./Object.assign":53,"./ReactComponentBrowserEnvironment":62,"./ReactMount":96,"./escapeTextContentForBrowser":138,"./setTextContent":156,"./validateDOMNesting":159,"_process":187}],78:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -9834,7 +9834,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMTextarea;
 }).call(this,require('_process'))
-},{"./LinkedValueUtils":52,"./Object.assign":53,"./ReactDOMIDOperations":71,"./ReactUpdates":114,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],79:[function(require,module,exports){
+},{"./LinkedValueUtils":52,"./Object.assign":53,"./ReactDOMIDOperations":71,"./ReactUpdates":114,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],79:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -10002,7 +10002,7 @@ module.exports = {
   inject: inject
 };
 }).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":33,"./ChangeEventPlugin":37,"./ClientReactRootIndex":38,"./DefaultEventPluginOrder":43,"./EnterLeaveEventPlugin":44,"./HTMLDOMPropertyConfig":51,"./ReactBrowserComponentMixin":56,"./ReactComponentBrowserEnvironment":62,"./ReactDOMComponent":68,"./ReactDOMTextComponent":77,"./ReactDefaultBatchingStrategy":79,"./ReactDefaultPerf":81,"./ReactEventListener":89,"./ReactInjection":90,"./ReactInstanceHandles":92,"./ReactMount":96,"./ReactReconcileTransaction":106,"./SVGDOMPropertyConfig":116,"./SelectEventPlugin":117,"./ServerReactRootIndex":118,"./SimpleEventPlugin":119,"_process":186,"fbjs/lib/ExecutionEnvironment":2}],81:[function(require,module,exports){
+},{"./BeforeInputEventPlugin":33,"./ChangeEventPlugin":37,"./ClientReactRootIndex":38,"./DefaultEventPluginOrder":43,"./EnterLeaveEventPlugin":44,"./HTMLDOMPropertyConfig":51,"./ReactBrowserComponentMixin":56,"./ReactComponentBrowserEnvironment":62,"./ReactDOMComponent":68,"./ReactDOMTextComponent":77,"./ReactDefaultBatchingStrategy":79,"./ReactDefaultPerf":81,"./ReactEventListener":89,"./ReactInjection":90,"./ReactInstanceHandles":92,"./ReactMount":96,"./ReactReconcileTransaction":106,"./SVGDOMPropertyConfig":116,"./SelectEventPlugin":117,"./ServerReactRootIndex":118,"./SimpleEventPlugin":119,"_process":187,"fbjs/lib/ExecutionEnvironment":2}],81:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -10692,7 +10692,7 @@ ReactElement.isValidElement = function (object) {
 
 module.exports = ReactElement;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./ReactCurrentOwner":65,"./canDefineProperty":135,"_process":186}],84:[function(require,module,exports){
+},{"./Object.assign":53,"./ReactCurrentOwner":65,"./canDefineProperty":135,"_process":187}],84:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -10976,7 +10976,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactPropTypeLocationNames":103,"./ReactPropTypeLocations":104,"./canDefineProperty":135,"./getIteratorFn":146,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],85:[function(require,module,exports){
+},{"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactPropTypeLocationNames":103,"./ReactPropTypeLocations":104,"./canDefineProperty":135,"./getIteratorFn":146,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],85:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -11157,7 +11157,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactErrorUtils;
 }).call(this,require('_process'))
-},{"_process":186}],88:[function(require,module,exports){
+},{"_process":187}],88:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -11877,7 +11877,7 @@ var ReactInstanceHandles = {
 
 module.exports = ReactInstanceHandles;
 }).call(this,require('_process'))
-},{"./ReactRootIndex":109,"_process":186,"fbjs/lib/invariant":16}],93:[function(require,module,exports){
+},{"./ReactRootIndex":109,"_process":187,"fbjs/lib/invariant":16}],93:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -12002,7 +12002,7 @@ var React = {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./ReactChildren":59,"./ReactClass":60,"./ReactComponent":61,"./ReactDOMFactories":69,"./ReactElement":83,"./ReactElementValidator":84,"./ReactPropTypes":105,"./ReactVersion":115,"./onlyChild":152,"_process":186}],95:[function(require,module,exports){
+},{"./Object.assign":53,"./ReactChildren":59,"./ReactClass":60,"./ReactComponent":61,"./ReactDOMFactories":69,"./ReactElement":83,"./ReactElementValidator":84,"./ReactPropTypes":105,"./ReactVersion":115,"./onlyChild":152,"_process":187}],95:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -12901,7 +12901,7 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 
 module.exports = ReactMount;
 }).call(this,require('_process'))
-},{"./DOMProperty":40,"./Object.assign":53,"./ReactBrowserEventEmitter":57,"./ReactCurrentOwner":65,"./ReactDOMFeatureFlags":70,"./ReactElement":83,"./ReactEmptyComponentRegistry":86,"./ReactInstanceHandles":92,"./ReactInstanceMap":93,"./ReactMarkupChecksum":95,"./ReactPerf":102,"./ReactReconciler":107,"./ReactUpdateQueue":113,"./ReactUpdates":114,"./instantiateReactComponent":149,"./setInnerHTML":155,"./shouldUpdateReactComponent":157,"./validateDOMNesting":159,"_process":186,"fbjs/lib/containsNode":5,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],97:[function(require,module,exports){
+},{"./DOMProperty":40,"./Object.assign":53,"./ReactBrowserEventEmitter":57,"./ReactCurrentOwner":65,"./ReactDOMFeatureFlags":70,"./ReactElement":83,"./ReactEmptyComponentRegistry":86,"./ReactInstanceHandles":92,"./ReactInstanceMap":93,"./ReactMarkupChecksum":95,"./ReactPerf":102,"./ReactReconciler":107,"./ReactUpdateQueue":113,"./ReactUpdates":114,"./instantiateReactComponent":149,"./setInnerHTML":155,"./shouldUpdateReactComponent":157,"./validateDOMNesting":159,"_process":187,"fbjs/lib/containsNode":5,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],97:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -13400,7 +13400,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 }).call(this,require('_process'))
-},{"./ReactChildReconciler":58,"./ReactComponentEnvironment":63,"./ReactCurrentOwner":65,"./ReactMultiChildUpdateTypes":98,"./ReactReconciler":107,"./flattenChildren":140,"_process":186}],98:[function(require,module,exports){
+},{"./ReactChildReconciler":58,"./ReactComponentEnvironment":63,"./ReactCurrentOwner":65,"./ReactMultiChildUpdateTypes":98,"./ReactReconciler":107,"./flattenChildren":140,"_process":187}],98:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -13530,7 +13530,7 @@ var ReactNativeComponent = {
 
 module.exports = ReactNativeComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"_process":186,"fbjs/lib/invariant":16}],100:[function(require,module,exports){
+},{"./Object.assign":53,"_process":187,"fbjs/lib/invariant":16}],100:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -13651,7 +13651,7 @@ var ReactNoopUpdateQueue = {
 
 module.exports = ReactNoopUpdateQueue;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/warning":27}],101:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/warning":27}],101:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -13745,7 +13745,7 @@ var ReactOwner = {
 
 module.exports = ReactOwner;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/invariant":16}],102:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/invariant":16}],102:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -13844,7 +13844,7 @@ function _noMeasure(objName, fnName, func) {
 
 module.exports = ReactPerf;
 }).call(this,require('_process'))
-},{"_process":186}],103:[function(require,module,exports){
+},{"_process":187}],103:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -13871,7 +13871,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactPropTypeLocationNames;
 }).call(this,require('_process'))
-},{"_process":186}],104:[function(require,module,exports){
+},{"_process":187}],104:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -14730,7 +14730,7 @@ module.exports = {
   renderToStaticMarkup: renderToStaticMarkup
 };
 }).call(this,require('_process'))
-},{"./ReactDefaultBatchingStrategy":79,"./ReactElement":83,"./ReactInstanceHandles":92,"./ReactMarkupChecksum":95,"./ReactServerBatchingStrategy":110,"./ReactServerRenderingTransaction":112,"./ReactUpdates":114,"./instantiateReactComponent":149,"_process":186,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16}],112:[function(require,module,exports){
+},{"./ReactDefaultBatchingStrategy":79,"./ReactElement":83,"./ReactInstanceHandles":92,"./ReactMarkupChecksum":95,"./ReactServerBatchingStrategy":110,"./ReactServerRenderingTransaction":112,"./ReactUpdates":114,"./instantiateReactComponent":149,"_process":187,"fbjs/lib/emptyObject":9,"fbjs/lib/invariant":16}],112:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -15078,7 +15078,7 @@ var ReactUpdateQueue = {
 
 module.exports = ReactUpdateQueue;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactInstanceMap":93,"./ReactUpdates":114,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],114:[function(require,module,exports){
+},{"./Object.assign":53,"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactInstanceMap":93,"./ReactUpdates":114,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],114:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -15304,7 +15304,7 @@ var ReactUpdates = {
 
 module.exports = ReactUpdates;
 }).call(this,require('_process'))
-},{"./CallbackQueue":36,"./Object.assign":53,"./PooledClass":54,"./ReactPerf":102,"./ReactReconciler":107,"./Transaction":131,"_process":186,"fbjs/lib/invariant":16}],115:[function(require,module,exports){
+},{"./CallbackQueue":36,"./Object.assign":53,"./PooledClass":54,"./ReactPerf":102,"./ReactReconciler":107,"./Transaction":131,"_process":187,"fbjs/lib/invariant":16}],115:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -16269,7 +16269,7 @@ var SimpleEventPlugin = {
 
 module.exports = SimpleEventPlugin;
 }).call(this,require('_process'))
-},{"./EventConstants":45,"./EventPropagators":49,"./ReactMount":96,"./SyntheticClipboardEvent":120,"./SyntheticDragEvent":122,"./SyntheticEvent":123,"./SyntheticFocusEvent":124,"./SyntheticKeyboardEvent":126,"./SyntheticMouseEvent":127,"./SyntheticTouchEvent":128,"./SyntheticUIEvent":129,"./SyntheticWheelEvent":130,"./getEventCharCode":142,"_process":186,"fbjs/lib/EventListener":1,"fbjs/lib/emptyFunction":8,"fbjs/lib/invariant":16,"fbjs/lib/keyOf":20}],120:[function(require,module,exports){
+},{"./EventConstants":45,"./EventPropagators":49,"./ReactMount":96,"./SyntheticClipboardEvent":120,"./SyntheticDragEvent":122,"./SyntheticEvent":123,"./SyntheticFocusEvent":124,"./SyntheticKeyboardEvent":126,"./SyntheticMouseEvent":127,"./SyntheticTouchEvent":128,"./SyntheticUIEvent":129,"./SyntheticWheelEvent":130,"./getEventCharCode":142,"_process":187,"fbjs/lib/EventListener":1,"fbjs/lib/emptyFunction":8,"fbjs/lib/invariant":16,"fbjs/lib/keyOf":20}],120:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -16568,7 +16568,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 
 module.exports = SyntheticEvent;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./PooledClass":54,"_process":186,"fbjs/lib/emptyFunction":8,"fbjs/lib/warning":27}],124:[function(require,module,exports){
+},{"./Object.assign":53,"./PooledClass":54,"_process":187,"fbjs/lib/emptyFunction":8,"fbjs/lib/warning":27}],124:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -17203,7 +17203,7 @@ var Transaction = {
 
 module.exports = Transaction;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/invariant":16}],132:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/invariant":16}],132:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -17293,7 +17293,7 @@ function accumulateInto(current, next) {
 
 module.exports = accumulateInto;
 }).call(this,require('_process'))
-},{"_process":186,"fbjs/lib/invariant":16}],134:[function(require,module,exports){
+},{"_process":187,"fbjs/lib/invariant":16}],134:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -17363,7 +17363,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = canDefineProperty;
 }).call(this,require('_process'))
-},{"_process":186}],136:[function(require,module,exports){
+},{"_process":187}],136:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -17470,7 +17470,7 @@ function deprecated(fnName, newModule, newPackage, ctx, fn) {
 
 module.exports = deprecated;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"_process":186,"fbjs/lib/warning":27}],138:[function(require,module,exports){
+},{"./Object.assign":53,"_process":187,"fbjs/lib/warning":27}],138:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -17561,7 +17561,7 @@ function findDOMNode(componentOrElement) {
 
 module.exports = findDOMNode;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":65,"./ReactInstanceMap":93,"./ReactMount":96,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],140:[function(require,module,exports){
+},{"./ReactCurrentOwner":65,"./ReactInstanceMap":93,"./ReactMount":96,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],140:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -17612,7 +17612,7 @@ function flattenChildren(children) {
 
 module.exports = flattenChildren;
 }).call(this,require('_process'))
-},{"./traverseAllChildren":158,"_process":186,"fbjs/lib/warning":27}],141:[function(require,module,exports){
+},{"./traverseAllChildren":158,"_process":187,"fbjs/lib/warning":27}],141:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -18136,7 +18136,7 @@ function instantiateReactComponent(node) {
 
 module.exports = instantiateReactComponent;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"./ReactCompositeComponent":64,"./ReactEmptyComponent":85,"./ReactNativeComponent":99,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],150:[function(require,module,exports){
+},{"./Object.assign":53,"./ReactCompositeComponent":64,"./ReactEmptyComponent":85,"./ReactNativeComponent":99,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],150:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -18274,7 +18274,7 @@ function onlyChild(children) {
 
 module.exports = onlyChild;
 }).call(this,require('_process'))
-},{"./ReactElement":83,"_process":186,"fbjs/lib/invariant":16}],153:[function(require,module,exports){
+},{"./ReactElement":83,"_process":187,"fbjs/lib/invariant":16}],153:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -18686,7 +18686,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactInstanceHandles":92,"./getIteratorFn":146,"_process":186,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],159:[function(require,module,exports){
+},{"./ReactCurrentOwner":65,"./ReactElement":83,"./ReactInstanceHandles":92,"./getIteratorFn":146,"_process":187,"fbjs/lib/invariant":16,"fbjs/lib/warning":27}],159:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015, Facebook, Inc.
@@ -19052,7 +19052,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = validateDOMNesting;
 }).call(this,require('_process'))
-},{"./Object.assign":53,"_process":186,"fbjs/lib/emptyFunction":8,"fbjs/lib/warning":27}],160:[function(require,module,exports){
+},{"./Object.assign":53,"_process":187,"fbjs/lib/emptyFunction":8,"fbjs/lib/warning":27}],160:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/React');
@@ -19297,7 +19297,7 @@ function combineReducers(reducers) {
   };
 }
 }).call(this,require('_process'))
-},{"./createStore":165,"./utils/warning":167,"_process":186,"lodash/isPlainObject":30}],164:[function(require,module,exports){
+},{"./createStore":165,"./utils/warning":167,"_process":187,"lodash/isPlainObject":30}],164:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -19593,7 +19593,7 @@ exports.bindActionCreators = _bindActionCreators2["default"];
 exports.applyMiddleware = _applyMiddleware2["default"];
 exports.compose = _compose2["default"];
 }).call(this,require('_process'))
-},{"./applyMiddleware":161,"./bindActionCreators":162,"./combineReducers":163,"./compose":164,"./createStore":165,"./utils/warning":167,"_process":186}],167:[function(require,module,exports){
+},{"./applyMiddleware":161,"./bindActionCreators":162,"./combineReducers":163,"./compose":164,"./createStore":165,"./utils/warning":167,"_process":187}],167:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -19623,28 +19623,57 @@ function warning(message) {
 
 var _block = require('../uiblocks-core/block');
 
+var block = _interopRequireWildcard(_block);
+
+var _initResult = require('../uiblocks-core/init-result');
+
+var initResult = _interopRequireWildcard(_initResult);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function mkBlock(innerInitForNew, innerBlock) {
 
   function initialize(init) {
-    return init.map(innerBlock.initialize);
+    var initResults = init.map(innerBlock.initialize);
+    var state = initResults.map(function (r) {
+      return r.state;
+    }).reduce(function (acc, s) {
+      return acc.concat([s]);
+    }, []);
+    var actions = initResults.map(function (r) {
+      return r.actions;
+    }).map(function (acts, i) {
+      return acts.map(function (a) {
+        return { type: "Edit", index: i, action: a };
+      });
+    }).reduce(function (acc, x) {
+      return acc.concat(x);
+    }, []);
+
+    return initResult.mk(state, actions);
   }
 
   function handle(state, action) {
     switch (action.type) {
       case 'Add':
-        var newInnerState = innerBlock.initialize(innerInitForNew);
-        return [].concat(_toConsumableArray(state), [newInnerState]);
+        var result = innerBlock.initialize(innerInitForNew);
+        return initResult.mk([].concat(_toConsumableArray(state), [result.state]), result.actions.map(function (a) {
+          return { type: "Edit", index: state.length, action: a };
+        }));
       case 'Edit':
         var oldInnerState = state[action.index];
-        var newInnerState1 = innerBlock.handle(oldInnerState, action.action);
+        var result1 = innerBlock.handle(oldInnerState, action.action);
+        var index = action.index;
 
-        return state.slice(0, action.index).concat([newInnerState1]).concat(state.slice(action.index + 1));
+        return initResult.mk(state.slice(0, action.index).concat([result1.state]).concat(state.slice(action.index + 1)), result1.actions.map(function (a) {
+          return { type: "Edit", index: index, action: a };
+        }));
       case 'Remove':
-        return state.slice(0, action.index).concat(state.slice(action.index + 1));
+        return initResult.mk(state.slice(0, action.index).concat(state.slice(action.index + 1)));
       default:
-        return state;
+        throw "unexpected";
     }
   }
 
@@ -19672,22 +19701,35 @@ function mkBlock(innerInitForNew, innerBlock) {
     });
   }
 
-  return (0, _block.mk)(initialize, handle, viewModel, readValue);
+  return block.mk(initialize, handle, viewModel, readValue);
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":176}],169:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/init-result":177}],169:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
 
-var option = require("../uiblocks-core/option");
+var block = _interopRequireWildcard(_block);
 
+var _initResult = require('../uiblocks-core/init-result');
+
+var initResult = _interopRequireWildcard(_initResult);
+
+var _option = require('../uiblocks-core/option');
+
+var option = _interopRequireWildcard(_option);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function mkBlock(innerBlock, config) {
 
   function initialize(init) {
-    return { type: "Editing", inner: innerBlock.initialize(init) };
+    return initResult.map(function (s) {
+      return { type: "Editing", inner: s };
+    }, function (a) {
+      return { type: "Inner", action: a };
+    })(innerBlock.initialize(init));
   }
 
   function handle(state, action) {
@@ -19695,9 +19737,13 @@ function mkBlock(innerBlock, config) {
       case 'Inner':
         switch (state.type) {
           case 'Editing':
-            return { type: "Editing", inner: innerBlock.handle(state.inner, action.action) };
+            return initResult.map(function (s) {
+              return { type: "Editing", inner: s };
+            }, function (a) {
+              return { type: "Inner", action: a };
+            })(innerBlock.handle(state.inner, action.action));
           default:
-            return state;
+            throw "unexpected";
         }
       case 'Submit':
         switch (state.type) {
@@ -19705,13 +19751,13 @@ function mkBlock(innerBlock, config) {
             var result = config.allowSubmit(innerBlock.readValue(state.inner));
             switch (result.type) {
               case 'Some':
-                return { type: "Submitted", value: result.value };
+                return initResult.mk({ type: "Submitted", value: result.value });
               case 'None':
                 var actions = config.actionsOnSubmitFail.map(function (a) {
                   return { type: "Inner", action: a };
                 });
 
-                return { type: "Editing", inner: state.inner }; // send back actions
+                return initResult.mk({ type: "Editing", inner: state.inner }, actions);
               default:
                 throw "unexpected";
             }
@@ -19758,21 +19804,22 @@ function mkBlock(innerBlock, config) {
     }
   }
 
-  return (0, _block.mk)(initialize, handle, viewModel, readValue);
+  return block.mk(initialize, handle, viewModel, readValue);
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":176,"../uiblocks-core/option":177}],170:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/init-result":177,"../uiblocks-core/option":178}],170:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
 
 var block = _interopRequireWildcard(_block);
 
+var _option = require('../uiblocks-core/option');
+
+var option = _interopRequireWildcard(_option);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var option = require("../uiblocks-core/option");
-
 
 var textEditor = require("./textEditor");
 var array = require("./array");
@@ -19921,33 +19968,57 @@ var block6 = form(block5, { allowSubmit: validatedToOption, actionsOnSubmitFail:
 module.exports = block.adaptInit(function (x) {
   return option.None;
 }, block6); // null -> Option<Person>
-},{"../uiblocks-core/block":176,"../uiblocks-core/option":177,"./array":168,"./form":169,"./record":171,"./textEditor":172,"./touched":173,"./value":174}],171:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/option":178,"./array":168,"./form":169,"./record":171,"./textEditor":172,"./touched":173,"./value":174}],171:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
 
+var block = _interopRequireWildcard(_block);
+
+var _initResult = require('../uiblocks-core/init-result');
+
+var initResult = _interopRequireWildcard(_initResult);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function mkBlock(innerBlock1, innerBlock2) {
 
   function initialize(init) {
-    return [innerBlock1.initialize(init[0]), innerBlock2.initialize(init[1])];
+    var result1 = innerBlock1.initialize(init[0]);
+    var result2 = innerBlock2.initialize(init[1]);
+    return initResult.mk([result1.state, result2.state], result1.actions.map(function (a) {
+      return { type: "one", action: a };
+    }).concat(result2.actions.map(function (a) {
+      return { type: "two", action: a };
+    })));
   }
 
   function handle(state, action) {
     switch (action.type) {
-      case 1:
-        return [innerBlock1.handle(state[0], action.action), state[1]];
-      case 2:
-        return [state[0], innerBlock2.handle(state[1], action.action)];
+      case "one":
+        var _action1 = action.action;
+        return initResult.map(function (s) {
+          return [s, state[1]];
+        }, function (a) {
+          return { type: "one", action: a };
+        })(innerBlock1.handle(state[0], _action1));
+      case "two":
+        var _action2 = action.action;
+        return initResult.map(function (s) {
+          return [state[0], s];
+        }, function (a) {
+          return { type: "two", action: a };
+        })(innerBlock2.handle(state[1], _action2));
       default:
-        return state;
+        throw "unexpected";
     }
   }
 
   function viewModel(state, dispatch) {
     return [innerBlock1.viewModel(state[0], function (a) {
-      return dispatch({ type: 1, action: a });
+      return dispatch({ type: "one", action: a });
     }), innerBlock2.viewModel(state[1], function (a) {
-      return dispatch({ type: 2, action: a });
+      return dispatch({ type: "two", action: a });
     })];
   }
 
@@ -19955,27 +20026,33 @@ function mkBlock(innerBlock1, innerBlock2) {
     return [innerBlock1.readValue(state[0]), innerBlock2.readValue(state[1])];
   }
 
-  return (0, _block.mk)(initialize, handle, viewModel, readValue);
+  return block.mk(initialize, handle, viewModel, readValue);
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":176}],172:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/init-result":177}],172:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
 
+var block = _interopRequireWildcard(_block);
+
+var _initResult = require('../uiblocks-core/init-result');
+
+var initResult = _interopRequireWildcard(_initResult);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function initialize(init) {
-  return init;
+  return initResult.mk(init);
 }
 
 function handle(state, action) {
   switch (action.type) {
     case 'Change':
-      console.log("change");
-      console.log(action);
-      return action.value;
+      return initResult.mk(action.value);
     default:
-      return state;
+      throw "unexpected";
   }
 }
 
@@ -19992,37 +20069,54 @@ function readValue(state) {
   return state;
 }
 
-var block = { initialize: initialize, handle: handle, viewModel: viewModel, readValue: readValue };
-
-module.exports = block;
-},{"../uiblocks-core/block":176}],173:[function(require,module,exports){
+module.exports = block.mk(initialize, handle, viewModel, readValue);
+},{"../uiblocks-core/block":176,"../uiblocks-core/init-result":177}],173:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
 
+var block = _interopRequireWildcard(_block);
+
+var _initResult = require('../uiblocks-core/init-result');
+
+var initResult = _interopRequireWildcard(_initResult);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function mkBlock(innerBlock) {
 
   function initialize(init) {
-    return {
-      Inner: innerBlock.initialize(init),
-      IsTouched: false
-    };
+    var innerResult = innerBlock.initialize(init);
+
+    return initResult.map(function (s) {
+      return {
+        Inner: s,
+        IsTouched: false
+      };
+    }, function (a) {
+      return { type: "Inner", action: a };
+    })(innerResult);
   }
 
   function handle(state, action) {
     switch (action.type) {
       case "Inner":
-        return {
-          Inner: innerBlock.handle(state.Inner, action.action),
-          IsTouched: true
-        };
+        var _action = action.action;
+        return initResult.map(function (s) {
+          return {
+            Inner: s,
+            IsTouched: true
+          };
+        }, function (a) {
+          return { type: "Inner", action: a };
+        })(innerBlock.handle(state.Inner, _action));
       case "Touch":
-        return {
+        return initResult.mk({
           Inner: state.Inner,
           IsTouched: true
-        };
+        });
       default:
-        return state;
+        throw "unexpected";
     }
   }
 
@@ -20039,14 +20133,22 @@ function mkBlock(innerBlock) {
     return innerBlock.readValue(state.Inner);
   }
 
-  return (0, _block.mk)(initialize, handle, viewModel, readValue);
+  return block.mk(initialize, handle, viewModel, readValue);
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":176}],174:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/init-result":177}],174:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
+
+var block = _interopRequireWildcard(_block);
+
+var _initResult = require('../uiblocks-core/init-result');
+
+var initResult = _interopRequireWildcard(_initResult);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function mkBlock(innerBlock) {
 
@@ -20057,12 +20159,14 @@ function mkBlock(innerBlock) {
     };
   }
 
-  return (0, _block.mk)(innerBlock.initialize, innerBlock.handle, viewModel, innerBlock.readValue);
+  return block.mk(innerBlock.initialize, innerBlock.handle, viewModel, innerBlock.readValue);
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":176}],175:[function(require,module,exports){
+},{"../uiblocks-core/block":176,"../uiblocks-core/init-result":177}],175:[function(require,module,exports){
 "use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 var _redux = require("redux");
 
@@ -20072,15 +20176,38 @@ var ReactDOM = require("react-dom");
 
 
 function reducer(state, action) {
+  console.log("action:", action);
+
   if (action.type == "blah") {
-    return block.handle(state, action.action);
+    var _ret = function () {
+      var result = block.handle(state, action.action);
+      console.log("result", result);
+
+      // TODO: Do this more cleanly (a bit hackish as-is)
+      window.setTimeout(function () {
+        return result.actions.map(function (a) {
+          return store.dispatch({ type: 'blah', action: a });
+        });
+      }, 50);
+
+      return {
+        v: result.state
+      };
+    }();
+
+    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
   } else {
     return state;
   }
 }
 
-var initState = block.initialize(null);
-var store = (0, _redux.createStore)(reducer, initState);
+var result = block.initialize(null);
+console.log("initial result", result);
+var store = (0, _redux.createStore)(reducer, result.state);
+
+result.actions.map(function (a) {
+  return store.dispatch({ type: 'blah', action: a });
+});
 
 function renderState(state) {
   var model = block.viewModel(state, function (a) {
@@ -20095,8 +20222,8 @@ renderState(store.getState());
 store.subscribe(function () {
   renderState(store.getState());
 });
-},{"./blocks/main":170,"./views/main":181,"react-dom":31,"redux":166}],176:[function(require,module,exports){
-"use strict";
+},{"./blocks/main":170,"./views/main":182,"react-dom":31,"redux":166}],176:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -20139,6 +20266,43 @@ function adaptValue(adapter, block) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.mk = mk;
+exports.combine = combine;
+exports.map = map;
+function mk(state, actions) {
+  if (actions == null) actions = [];
+
+  return {
+    state: state,
+    actions: actions
+  };
+}
+
+function combine(initResults) {
+  var newState = initResults.map(function (x) {
+    return x.state;
+  });
+
+  var actions = initResults.map(function (x) {
+    return x.actions;
+  }).reduce(function (acc, next) {
+    return acc.concat(next);
+  });
+
+  return mk(newState, actions);
+}
+
+function map(stateMapper, actionMapper) {
+  return function (x) {
+    return mk(stateMapper(x.state), x.actions.map(actionMapper));
+  };
+}
+},{}],178:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.Some = Some;
 exports.map = map;
 var None = exports.None = { type: "None" };
@@ -20158,7 +20322,7 @@ function map(f) {
     }
   };
 }
-},{}],178:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20202,7 +20366,7 @@ function mkView(inner) {
 }
 
 module.exports = mkView;
-},{"react":160}],179:[function(require,module,exports){
+},{"react":160}],180:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20228,7 +20392,7 @@ function main(model) {
 }
 
 module.exports = main;
-},{"react":160}],180:[function(require,module,exports){
+},{"react":160}],181:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20278,7 +20442,7 @@ function mkView(inner) {
 }
 
 module.exports = mkView;
-},{"react":160}],181:[function(require,module,exports){
+},{"react":160}],182:[function(require,module,exports){
 'use strict';
 
 var array = require('./array');
@@ -20306,7 +20470,7 @@ function validatedTextEditor(model) {
 var a = form(value(record(validatedTextEditor, validatedTextEditor)));
 
 module.exports = a;
-},{"./array":178,"./counter":179,"./form":180,"./record":182,"./textEditor":183,"./touched":184,"./value":185,"react":160}],182:[function(require,module,exports){
+},{"./array":179,"./counter":180,"./form":181,"./record":183,"./textEditor":184,"./touched":185,"./value":186,"react":160}],183:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20331,7 +20495,7 @@ function mkView(inner1, inner2) {
 }
 
 module.exports = mkView;
-},{"react":160}],183:[function(require,module,exports){
+},{"react":160}],184:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20348,7 +20512,7 @@ function main(model) {
 }
 
 module.exports = main;
-},{"react":160}],184:[function(require,module,exports){
+},{"react":160}],185:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20373,7 +20537,7 @@ function mkView(inner) {
 }
 
 module.exports = mkView;
-},{"react":160}],185:[function(require,module,exports){
+},{"react":160}],186:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -20397,7 +20561,7 @@ function mkView(inner) {
 }
 
 module.exports = mkView;
-},{"react":160}],186:[function(require,module,exports){
+},{"react":160}],187:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};

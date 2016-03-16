@@ -25,9 +25,10 @@ http.createServer(function (req, res){
       fs.readFile("index.html", (err, buffer) => {
         if (err == null){
           const html = buffer.toString("utf8");
-          const initialState = block.initialize(null);
+          const initialState = block.initialize(null).state;
 
-          // take URL and generate initial actions to apply to state (nav)
+          // TODO: respect generated additional actions from initResult above
+          // TODO: take URL and generate initial actions (or init param) to apply to state (nav)
 
           const initialStateJSON = JSON.stringify(initialState);
           const initialElement = view(block.viewModel(initialState, a => {}));

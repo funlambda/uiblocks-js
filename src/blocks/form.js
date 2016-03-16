@@ -1,10 +1,11 @@
 // @flow
 
-import { mk } from '../uiblocks-core/block';
-import type { Block } from '../uiblocks-core/block';
-
-const option = require("../uiblocks-core/option");
 import type { Option } from "../uiblocks-core/option";
+import type { Block } from '../uiblocks-core/block';
+import type { InitResult } from '../uiblocks-core/init-result';
+import * as block from '../uiblocks-core/block';
+import * as initResult from '../uiblocks-core/init-result';
+import * as option from '../uiblocks-core/option';
 
 export type State<InnerState, a> =
   { type: "Editing", inner: InnerState }
@@ -28,18 +29,23 @@ function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue, a>(
     config: Config<InnerAction, InnerValue, a>)
     : Block<InnerInit, State<InnerState, a>, Action<InnerAction>, Model<InnerModel, a>, Value<a>> {
 
-  function initialize(init: InnerInit): State<InnerState, a> {
-    return { type: "Editing", inner: innerBlock.initialize(init) };
+  function initialize(init: InnerInit): InitResult<State<InnerState, a>, Action<InnerAction>> {
+    return initResult.map(
+      s => ({ type: "Editing", inner: s}),
+      a => ({ type: "Inner", action: a }))
+      (innerBlock.initialize(init));
   }
 
-  function handle(state: State<InnerState, a>, action: Action<InnerAction>): State<InnerState, a> {
+  function handle(state: State<InnerState, a>, action: Action<InnerAction>): InitResult<State<InnerState, a>, Action<InnerAction>> {
     switch (action.type) {
       case 'Inner':
         switch (state.type) {
           case 'Editing':
-            return { type: "Editing", inner: innerBlock.handle(state.inner, action.action) };
-          default:
-            return state;
+            return initResult.map(
+              s => ({ type: "Editing", inner: s}),
+              a => ({ type: "Inner", action: a }))
+            (innerBlock.handle(state.inner, action.action));
+          default: throw "unexpected";
         }
       case 'Submit':
         switch (state.type) {
@@ -47,11 +53,11 @@ function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue, a>(
             const result = config.allowSubmit(innerBlock.readValue(state.inner));
             switch (result.type){
               case 'Some':
-                return { type: "Submitted", value: result.value };
+                return initResult.mk({ type: "Submitted", value: result.value });
               case 'None':
                 const actions = config.actionsOnSubmitFail.map(a => ({ type: "Inner", action: a }));
 
-                return { type: "Editing", inner: state.inner }; // send back actions
+                return initResult.mk({ type: "Editing", inner: state.inner }, actions);
               default: throw "unexpected";
             }
           default: throw "unexpected";
@@ -89,7 +95,7 @@ function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue, a>(
     }
   }
 
-  return mk(initialize, handle, viewModel, readValue);
+  return block.mk(initialize, handle, viewModel, readValue);
 }
 
 module.exports = mkBlock;

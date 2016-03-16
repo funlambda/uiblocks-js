@@ -1,10 +1,10 @@
 // @flow
 
-import * as block from '../uiblocks-core/block';
 import type { Block } from '../uiblocks-core/block';
-
-const option = require("../uiblocks-core/option");
 import type { Option } from "../uiblocks-core/option";
+
+import * as block from '../uiblocks-core/block';
+import * as option from '../uiblocks-core/option';
 
 const textEditor = require("./textEditor");
 const array = require("./array");
