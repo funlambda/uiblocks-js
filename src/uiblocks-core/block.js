@@ -19,24 +19,22 @@ export function mk<Init, State, Action, Model, Value>(
 }
 
 export function adaptInit<InitA, InitB, State, Action, Model, Value>(
-  adapter: (i: InitB) => InitA,
-  block: Block<InitA, State, Action, Model, Value>
-): Block<InitB, State, Action, Model, Value> {
+  adapter: (i: InitB) => InitA):
+    (x: Block<InitA, State, Action, Model, Value>) => Block<InitB, State, Action, Model, Value> {
 
-  return {
+  return block => ({
     initialize: (init: InitB) => block.initialize(adapter(init)),
     handle: block.handle,
     viewModel: block.viewModel,
     readValue: block.readValue
-  }
+  });
 }
 
 export function adaptValue<Init, State, Action, Model, ValueA, ValueB>(
-  adapter: (i: ValueA) => ValueB,
-  block: Block<Init, State, Action, Model, ValueA>
-): Block<Init, State, Action, Model, ValueB> {
+  adapter: (i: ValueA) => ValueB):
+    (x: Block<Init, State, Action, Model, ValueA>) => Block<Init, State, Action, Model, ValueB> {
 
-    return {
+    return block => ({
       initialize: block.initialize,
       handle: block.handle,
       viewModel: block.viewModel,
@@ -44,5 +42,5 @@ export function adaptValue<Init, State, Action, Model, ValueA, ValueB>(
         const value = block.readValue(state);
         return adapter(value);
       }
-    }
+    });
   }

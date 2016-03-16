@@ -4,6 +4,7 @@ const array = require('./array');
 const textEditor = require("./textEditor");
 const counter = require('./counter');
 const value = require('./value');
+const tuple = require('./tuple');
 const record = require('./record');
 const touched = require('./touched');
 const form = require('./form');
@@ -25,6 +26,7 @@ function validatedTextEditor<a>(model: TouchedModel<ValueModel<TextModel, Valida
   return (<input type="text" value={model.Inner.Inner.value} onChange={toChangeHandler(model.Inner.Inner.onChange)} style={style}/>);
 }
 
-const a = form(value(record(validatedTextEditor, validatedTextEditor)));
+//const a = form(value(tuple(validatedTextEditor, tuple(validatedTextEditor, validatedTextEditor))));
+const a = form(value(record(validatedTextEditor, validatedTextEditor, validatedTextEditor)));
 
 module.exports = a;
