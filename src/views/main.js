@@ -7,6 +7,7 @@ const record = require('./record');
 const form = require('./form');
 const touched = require('./touched');
 const React = require("react");
+const BS = require('react-bootstrap');
 
 import type { Model as TextModel } from '../blocks/textEditor';
 import type { Model as ValueModel } from '../blocks/value';
@@ -17,11 +18,11 @@ const toChangeHandler: (handler: (x: string) => void) => ((ce: any) => void) =
   handler => (ce => handler(ce.target.value));
 
 
-function validatedTextEditor<a>(model: TouchedModel<ValueModel<TextModel, Validated<a>>>): React$Element {
-  const style = {
-    backgroundColor: (model.IsTouched && model.Inner.Value.type == "Invalid" ? "red" : "")
-  };
-  return (<input type="text" value={model.Inner.Inner.value} onChange={toChangeHandler(model.Inner.Inner.onChange)} style={style}/>);
+function validatedTouched<a, b>(inner: (validationStatus: string) => (model: b) => React$Element) {
+  return (model: TouchedModel<ValueModel<TextModel, Validated<a>>>): React$Element => {
+    const validationStatus = model.IsTouched && model.Inner.Value.type == "Invalid" ? "error" : null;
+    return inner(validationStatus)(model.Inner.Inner);
+  }
 }
 
 function buildRecordEditorView(spec: { [key: string]: (m: any) => React$Element }){
@@ -36,6 +37,13 @@ function buildRecordEditorView(spec: { [key: string]: (m: any) => React$Element 
   return block5;
 }
 
+function wrapInPanel<Model>(view: (m: Model) => React$Element){
+  return m => (
+    <BS.Panel style={{width: 500}}>
+      {view(m)}
+    </BS.Panel>
+  );
+}
 
 
 const a =
@@ -43,12 +51,12 @@ const a =
     touched(
       value(
         record({
-          name: validatedTextEditor,
-          color: validatedTextEditor,
-          age: validatedTextEditor
+          name: validatedTouched(s => textEditor({ bsStyle: s, label: "Name", placeholder: "Name" })),
+          color: validatedTouched(s => textEditor({ bsStyle: s, label: "Favorite Color", placeholder: "Favorite Color" })),
+          age: validatedTouched(s => textEditor({ bsStyle: s, label: "Age", placeholder: "Age" }))
         })
       )
     )
   );
 
-module.exports = a;
+module.exports = wrapInPanel(a);

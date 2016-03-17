@@ -5,6 +5,9 @@ import type { Model } from '../blocks/value';
 
 function mkView<InnerModel, InnerValue>(inner: (model: InnerModel) => React$Element): (model: Model<InnerModel, InnerValue>) => React$Element {
   function main(model: Model<InnerModel, InnerValue>){
+    return inner(model.Inner);
+
+    // for debug purposes:
     return (
       <span>
         {inner(model.Inner)}

@@ -1,6 +1,7 @@
 // @flow
 
 const React = require('react');
+const BS = require('react-bootstrap');
 import type { Model } from '../blocks/form';
 
 const toClickHandler: (handler: () => void) => ((ce: any) => bool) =
@@ -17,9 +18,9 @@ function mkView<InnerModel, a>(inner: (model: InnerModel) => React$Element): (mo
       case "Editing":
         return (
           <div>
-            <form>
+            <form onSubmit={toClickHandler(model.form.OnSubmit)}>
               {inner(model.form.Inner)}
-              <button onClick={toClickHandler(model.form.OnSubmit)}>Submit</button>
+              <BS.ButtonInput type="submit" value="Submit" />
             </form>
           </div>
         );
