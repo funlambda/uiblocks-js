@@ -19,7 +19,8 @@ export type Model<InnerModel> = {
 }
 
 function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>(
-    innerBlock: Block<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>)
+      innerBlock: Block<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>,
+      actionsOnTouch?: Array<InnerAction>)
     : Block<InnerInit, State<InnerState>, Action<InnerAction>, Model<InnerModel>, InnerValue> {
 
   function initialize(init: InnerInit): InitResult<State, Action> {
@@ -46,10 +47,17 @@ function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>(
           a => ({ type: "Inner", action: a })
         )(innerBlock.handle(state.Inner, _action));
       case "Touch":
+        const _actions =
+          actionsOnTouch != null
+            ? actionsOnTouch.map(a => ({ type: "Inner", action: a}))
+            : [];
+
+        console.log("actions: ", _actions);
+
         return initResult.mk({
           Inner: state.Inner,
           IsTouched: true
-        });
+        }, _actions);
       default: throw "unexpected";
     }
   }

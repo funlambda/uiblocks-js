@@ -3,15 +3,12 @@
 const React = require('react');
 import type { Model } from '../blocks/tuple';
 
-function mkView<InnerModel1, InnerModel2>(inner1: (model: InnerModel1) => React$Element, inner2: (model: InnerModel2) => React$Element): (model: Model<InnerModel1, InnerModel2>) => React$Element {
-  function main(model: Model<InnerModel1, InnerModel2>){
+function mkView(...innerViews: Array<(model: any) => React$Element>): (model: Model) => React$Element {
+  function main(model: Model){
     return (
       <div>
         <div>
-          {inner1(model[0])}
-        </div>
-        <div>
-          {inner2(model[1])}
+          {model.map((x,i) => innerViews[i](x))}
         </div>
       </div>
     );

@@ -5,52 +5,61 @@ import type { InitResult } from '../uiblocks-core/init-result';
 import * as block from '../uiblocks-core/block';
 import * as initResult from '../uiblocks-core/init-result';
 
-export type Init = Array<any>
-export type State = Array<any>
-export type Action = { index: number, action: any }
-export type Model = Array<any>
-export type Value = Array<any>
+export type Init = object
+export type State = object
+export type Action = { key: string, action: any }
+export type Model = object
+export type Value = object
 
-function mkBlock(...innerBlocks: Array<Block>)
+function mkBlock(innerBlocks: { [key: string]: Block })
     : Block<Init, State, Action, Model, Value> {
 
   function initialize(init: Init): InitResult<State, Action> {
-    const initResults =
-      init.map((x, i) => innerBlocks[i].initialize(x));
+    const xx =
+      Object.keys(innerBlocks)
+            .map(k => [ k, innerBlocks[k].initialize(init[k]) ]);
 
-    const state =
-      initResults
-        .map(r => r.state)
-        .reduce((acc, s) => acc.concat([s]), []);
-
-    const actions =
-     initResults
-       .map(r => r.actions)
-       .map((acts, i) => acts.map(a => ({ index: i, action: a })))
-       .reduce((acc, x) => acc.concat(x), []);
+    const state = xx.map(x => [ x[0], x[1].state ])
+                    .reduce((acc, next) => { acc[next[0]] = next[1]; return acc; }, {});
+    const actions = xx.map(x => x[1].actions.map(y => ({ key: x[0], action: y })))
+                      .reduce((acc, next) => acc.concat(next), []);
 
     return initResult.mk(state, actions);
   }
 
   function handle(state: State, action: Action): InitResult<State, Action> {
-    const innerBlock = innerBlocks[action.index];
-    const result = innerBlock.handle(state[action.index], action.action);
+    const innerBlock = innerBlocks[action.key];
+    const result = innerBlock.handle(state[action.key], action.action);
 
     return initResult.map(
-      s => state
-             .slice(0, action.index)
-             .concat([result.state])
-             .concat(state.slice(action.index + 1)),
-      a => ({ index: action.index, action: a})
+      s => {
+        const x =
+          Object.keys(state)
+                .map(k => [ k, (k == action.key ? s : state[k]) ])
+                .reduce((acc, next) => { acc[next[0]] = next[1]; return acc; }, {})
+
+        return x;
+      },
+      a => ({ key: action.key, action: a})
     )(result);
   }
 
   function viewModel(state: State, dispatch: (a: Action) => void): Model {
-    return state.map((x, i) => innerBlocks[i].viewModel(x, a => dispatch({ index: i, action: a })));
+    const xx =
+      Object.keys(innerBlocks)
+            .map(k => [ k, innerBlocks[k].viewModel(state[k], a => dispatch({key: k, action: a})) ])
+            .reduce((acc, next) => { acc[next[0]] = next[1]; return acc; }, {});
+
+    return xx;
   }
 
   function readValue(state: State): Value {
-    return state.map((x, i) => innerBlocks[i].readValue(x));
+    const xx =
+      Object.keys(innerBlocks)
+            .map(k => [ k, innerBlocks[k].readValue(state[k]) ])
+            .reduce((acc, next) => { acc[next[0]] = next[1]; return acc; }, {});
+
+    return xx;
   }
 
   return block.mk(initialize, handle, viewModel, readValue);

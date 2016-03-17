@@ -3,12 +3,13 @@
 const React = require('react');
 import type { Model } from '../blocks/record';
 
-function mkView(...innerViews: Array<(model: any) => React$Element>): (model: Model) => React$Element {
+function mkView(innerViews: { [key: string]: ((model: any) => React$Element) }): (model: Model) => React$Element {
   function main(model: Model){
     return (
       <div>
         <div>
-          {model.map((x,i) => innerViews[i](x))}
+          {Object.keys(innerViews)
+                 .map(k => innerViews[k](model[k]))}
         </div>
       </div>
     );

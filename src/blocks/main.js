@@ -110,10 +110,30 @@ function combineValidated<A, B>(x: [Validated<A>, Validated<B>]): Validated<[A, 
   }
 }
 
-function combineValidated(a: Array<Validated<any>>): Validated<Array<any>> {
+function combineValidated2(a: Array<Validated<any>>): Validated<Array<any>> {
   const invalids = a.filter(x => x.type == "Invalid").map(x => x.messages);
   if (invalids.length == 0){
     return { type: "Valid", value: a.map(x => x.value) };
+  } else{
+    return { type: "Invalid", messages: invalids.reduce((acc, next) => acc.concat(next), []) };
+  }
+}
+
+function combineValidated3(a: any): Validated<any> {
+  const dict =
+    Object.keys(a)
+          .map(k => [ k, a[k] ]);
+
+  const invalids =
+    dict.filter(x => x[1].type == "Invalid")
+        .map(x => x[1].messages);
+
+  if (invalids.length == 0){
+    return {
+      type: "Valid",
+      value: dict.map(x => [ x[0], x[1].value ])
+                 .reduce((acc, next) => { acc[next[0]] = next[1]; return acc; }, {})
+    };
   } else{
     return { type: "Invalid", messages: invalids.reduce((acc, next) => acc.concat(next), []) };
   }
@@ -170,6 +190,21 @@ function splitOptionArray(n: number): (x: Option<Array<any>>) => Array<Option<an
   };
 }
 
+function splitOptionObject(...keys: Array<string>): (x: Option<{ [key: string]: any }>) => { [key: string]: Option<any> } {
+  return x => {
+    switch (x.type){
+      case "Some":
+        return keys.map(k => [ k, option.Some(x.value[k]) ])
+                   .reduce((acc, next) => { acc[next[0]] = next[1]; return acc; }, {});
+
+      case "None":
+        return keys.map(k => [ k, option.None ])
+                   .reduce((acc, next) => { acc[next[0]] = next[1]; return acc; }, {});
+      default: throw "unexpected";
+    }
+  }
+}
+
 function validatedToOption<a>(x: Validated<a>): Option<a> {
   switch (x.type){
     case "Valid":
@@ -187,84 +222,29 @@ function applyToSnd<A,B,C>(f: (y: B) => C): (x: [A,B]) => [A,C] {
   };
 }
 
+function buildRecordEditorBlock(spec: { [key: string]: Block }){
+  const block1 = record(spec);
+  const block2 = block.adaptValue(combineValidated3)(block1);
+  const block3 = block.adaptInit(splitOptionObject(...Object.keys(spec)))(block2);
+  const block4 = value(block3);
+  const block5 = touched(block4,
+    Object.keys(spec).map(k => ({ key: k, action: { type: "Touch" } }))
+  );
 
-const a = touched(value(stringEditor));
-const b = touched(value(stringEditor));
-const c = touched(value(numberEditor));
+  return block5;
+}
 
+const a = buildRecordEditorBlock({
+  name: touched(value(stringEditor)),
+  color: touched(value(stringEditor)),
+  age: touched(value(numberEditor))
+});
 
-const block1 = record(a,b,c);
-// [Option<string>, Option<string>, Option<number>] -> [Validated<string>, Validated<string>, Validated<number>]
-
-console.log("block1", block1);
-
-const block2 =
-  _.flow(
-      block.adaptValue(combineValidated),
-      // [Option<string>, Option<string>, Option<number>] -> Validated<[string, string, number]>
-      block.adaptValue(mapValidated((x: [string, string, number]): Person => ({ name: x[0], color: x[1], age: x[2] }))),
-      // [Option<string>, Option<string>, Option<number>] -> Validated<Person>
-      block.adaptInit(splitOptionArray(3)),
-      // Option<[string, string, number]> -> Validated<Person>
-      block.adaptInit(option.map((x: Person) => [x.name, x.color, x.age]))
-      // Option<Person> -> Validated<Person>
-    )(block1);
-
-console.log("block2", block2);
-
-const block3 = value(block2);
-
-console.log("block3", block3);
-
-const block4 = form(block3,
+const b = form(a,
   {
     allowSubmit: validatedToOption,
-    actionsOnSubmitFail: [
-      { index: 0, action: { type: "Touch" } },
-      { index: 1, action: { type: "Touch" } },
-      { index: 2, action: { type: "Touch" } }
-    ]
+    actionsOnSubmitFail: [{ type: "Touch" }]
   });
-// Option<Person> -> Option<Person>
 
-console.log("block4", block4);
-
-module.exports = block.adaptInit((x: null) => option.None)(block4);
+module.exports = block.adaptInit((x: null) => option.None)(b);
 // null -> Option<Person>
-
-
-
-//
-// const block1 = tuple(a, tuple(b, c));
-// // [Option<string>, [Option<string>, Option<number>]] -> [Validated<string>, [Validated<string>, Validated<number>]]
-//
-// const block2 =
-//   _.flow(
-//       block.adaptValue(applyToSnd(combineValidated)),
-//       // [Option<string>, [Option<string>, Option<number>]] -> [Validated<string>, Validated<[string, number]>>
-//       block.adaptValue(combineValidated),
-//       // [Option<string>, [Option<string>, Option<number>]] -> Validated<[string, [string, number]]>
-//       block.adaptValue(mapValidated((x: [string, [string, number]]): Person => ({ name: x[0], color: x[1][0], age: x[1][1] }))),
-//       // [Option<string>, [Option<string>, Option<number>]] -> Validated<Person>
-//       block.adaptInit(applyToSnd(splitOptionTuple)),
-//       // [Option<string>, Option<[string,number]> -> Validated<Person>
-//       block.adaptInit(splitOptionTuple),
-//       // Option<[string, [string,number]]> -> Validated<Person>
-//       block.adaptInit(option.map((x: Person) => [x.name, [x.color, x.age]]))
-//       // Option<Person> -> Validated<Person>
-//     )(block1);
-//
-// const block3 = value(block2);
-// // Option<Person> -> Option<Person>
-//
-// const block4 = form(block3,
-//   {
-//     allowSubmit: validatedToOption,
-//     actionsOnSubmitFail: [
-//       { type: "one", action: { type: "Touch" } },
-//       { type: "two", action: { type: "one", action: { type: "Touch" } } },
-//       { type: "two", action: { type: "two", action: { type: "Touch" } } }
-//     ]
-//   });
-//
-// module.exports = block.adaptInit((x: null) => option.None, block4); // null -> Option<Person>
