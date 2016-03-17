@@ -14,10 +14,10 @@ type Config = {
   bsStyle?: string
 }
 
-function main(config: Config) {
-  return function(model: Model){
+function main(config: Config): (m: Model) => React$Element {
+  return function(model: Model): React$Element {
     return (
-      <BS.Input type="text" bsStyle={config.bsStyle} bsSize="large" hasFeedback label={config.label} placeholder={config.placeholder} value={model.value} onChange={toChangeHandler(model.onChange)} />
+      <BS.Input type="text" bsStyle={config.bsStyle} bsSize="medium" hasFeedback label={config.label} placeholder={config.placeholder} value={model.value} onChange={toChangeHandler(model.onChange)} />
     );
   }
 }

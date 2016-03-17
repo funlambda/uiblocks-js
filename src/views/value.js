@@ -8,14 +8,14 @@ function mkView<InnerModel, InnerValue>(inner: (model: InnerModel) => React$Elem
     return inner(model.Inner);
 
     // for debug purposes:
-    return (
-      <span>
-        {inner(model.Inner)}
-        <pre style={{display: "inline-block"}}>
-          {JSON.stringify(model.Value)}
-        </pre>
-      </span>
-    );
+    // return (
+    //   <span>
+    //     {inner(model.Inner)}
+    //     <pre style={{display: "inline-block"}}>
+    //       {JSON.stringify(model.Value)}
+    //     </pre>
+    //   </span>
+    // );
   }
 
   return main;

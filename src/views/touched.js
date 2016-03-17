@@ -8,14 +8,14 @@ function mkView<InnerModel>(inner: (model: InnerModel) => React$Element): (model
     return inner(model.Inner);
 
     // for debug purposes:
-    return (
-      <span>
-        {inner(model.Inner)}
-        <pre style={{display: "inline-block"}}>
-          IsTouched == {JSON.stringify(model.IsTouched)}
-        </pre>
-      </span>
-    );
+    // return (
+    //   <span>
+    //     {inner(model.Inner)}
+    //     <pre style={{display: "inline-block"}}>
+    //       IsTouched == {JSON.stringify(model.IsTouched)}
+    //     </pre>
+    //   </span>
+    // );
   }
 
   return main;

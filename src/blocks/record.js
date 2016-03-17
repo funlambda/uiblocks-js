@@ -5,11 +5,11 @@ import type { InitResult } from '../uiblocks-core/init-result';
 import * as block from '../uiblocks-core/block';
 import * as initResult from '../uiblocks-core/init-result';
 
-export type Init = object
-export type State = object
+export type Init = Object
+export type State = Object
 export type Action = { key: string, action: any }
-export type Model = object
-export type Value = object
+export type Model = Object
+export type Value = Object
 
 function mkBlock(innerBlocks: { [key: string]: Block })
     : Block<Init, State, Action, Model, Value> {
