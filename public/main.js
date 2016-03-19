@@ -37255,7 +37255,7 @@ var React = require('react');
 
 
 function mkView(inner) {
-  function main(model) {
+  return function (model) {
     return React.createElement(
       'div',
       null,
@@ -37286,9 +37286,7 @@ function mkView(inner) {
         );
       })
     );
-  }
-
-  return main;
+  };
 }
 
 module.exports = mkView;
@@ -37309,7 +37307,7 @@ var toClickHandler = function toClickHandler(handler) {
 };
 
 function mkView(inner) {
-  function main(model) {
+  return function (model) {
     switch (model.type) {
       case "Editing":
         return React.createElement(
@@ -37333,16 +37331,12 @@ function mkView(inner) {
       default:
         throw "unexpected";
     }
-  }
-
-  return main;
+  };
 }
 
 module.exports = mkView;
 },{"react":404,"react-bootstrap":240}],431:[function(require,module,exports){
 'use strict';
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var array = require('./array');
 var textEditor = require("./textEditor");
@@ -37350,6 +37344,8 @@ var value = require('./value');
 var record = require('./record');
 var form = require('./form');
 var touched = require('./touched');
+var block = require('../uiblocks-core/block');
+var validation = require('../uiblocks-core/validation');
 var React = require("react");
 var BS = require('react-bootstrap');
 
@@ -37366,18 +37362,6 @@ function validatedTouched(inner) {
   };
 }
 
-function buildRecordEditorView(spec) {
-  var block1 = record(spec);
-  var block2 = block.adaptValue(combineValidated3)(block1);
-  var block3 = block.adaptInit(splitOptionObject.apply(undefined, _toConsumableArray(Object.keys(spec))))(block2);
-  var block4 = value(block3);
-  var block5 = touched(block4, Object.keys(spec).map(function (k) {
-    return { key: k, action: { type: "Touch" } };
-  }));
-
-  return block5;
-}
-
 function wrapInPanel(view) {
   return function (m) {
     return React.createElement(
@@ -37388,7 +37372,7 @@ function wrapInPanel(view) {
   };
 }
 
-var a = form(touched(value(record({
+var a = wrapInPanel(form(touched(value(record({
   name: validatedTouched(function (s) {
     return textEditor({ bsStyle: s, label: "Name", placeholder: "Name" });
   }),
@@ -37398,17 +37382,17 @@ var a = form(touched(value(record({
   age: validatedTouched(function (s) {
     return textEditor({ bsStyle: s, label: "Age", placeholder: "Age" });
   })
-}))));
+})))));
 
-module.exports = wrapInPanel(a);
-},{"./array":429,"./form":430,"./record":432,"./textEditor":433,"./touched":434,"./value":435,"react":404,"react-bootstrap":240}],432:[function(require,module,exports){
+module.exports = a;
+},{"../uiblocks-core/block":425,"../uiblocks-core/validation":428,"./array":429,"./form":430,"./record":432,"./textEditor":433,"./touched":434,"./value":435,"react":404,"react-bootstrap":240}],432:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 
 
 function mkView(innerViews) {
-  function main(model) {
+  return function (model) {
     return React.createElement(
       'div',
       null,
@@ -37420,9 +37404,7 @@ function mkView(innerViews) {
         })
       )
     );
-  }
-
-  return main;
+  };
 }
 
 module.exports = mkView;
@@ -37438,35 +37420,33 @@ var toChangeHandler = function toChangeHandler(handler) {
   };
 };
 
-function main(config) {
+function mkView(config) {
   return function (model) {
     return React.createElement(BS.Input, { type: 'text', bsStyle: config.bsStyle, bsSize: 'medium', hasFeedback: true, label: config.label, placeholder: config.placeholder, value: model.value, onChange: toChangeHandler(model.onChange) });
   };
 }
 
-module.exports = main;
+module.exports = mkView;
 },{"react":404,"react-bootstrap":240}],434:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 
 
-function mkView(inner) {
-  function main(model) {
-    return inner(model.Inner);
-
-    // for debug purposes:
-    // return (
-    //   <span>
-    //     {inner(model.Inner)}
-    //     <pre style={{display: "inline-block"}}>
-    //       IsTouched == {JSON.stringify(model.IsTouched)}
-    //     </pre>
-    //   </span>
-    // );
-  }
-
-  return main;
+function mkView(inner, debug) {
+  return function (model) {
+    return debug ? React.createElement(
+      'span',
+      null,
+      inner(model.Inner),
+      React.createElement(
+        'pre',
+        { style: { display: "inline-block" } },
+        'IsTouched == ',
+        JSON.stringify(model.IsTouched)
+      )
+    ) : inner(model.Inner);
+  };
 }
 
 module.exports = mkView;
@@ -37476,22 +37456,19 @@ module.exports = mkView;
 var React = require('react');
 
 
-function mkView(inner) {
-  function main(model) {
-    return inner(model.Inner);
-
-    // for debug purposes:
-    // return (
-    //   <span>
-    //     {inner(model.Inner)}
-    //     <pre style={{display: "inline-block"}}>
-    //       {JSON.stringify(model.Value)}
-    //     </pre>
-    //   </span>
-    // );
-  }
-
-  return main;
+function mkView(inner, debug) {
+  return function (model) {
+    return debug ? React.createElement(
+      'span',
+      null,
+      inner(model.Inner),
+      React.createElement(
+        'pre',
+        { style: { display: "inline-block" } },
+        JSON.stringify(model.Value)
+      )
+    ) : inner(model.Inner);
+  };
 }
 
 module.exports = mkView;

@@ -28,7 +28,7 @@ function mkBlock<InnerInit1, InnerInit2, InnerState1, InnerState2, InnerAction1,
     return initResult.mk(
       [ result1.state, result2.state ],
       result1.actions.map(a => ({ type: "one", action: a }: Action<InnerAction1, InnerAction2>))
-        .concat(result2.actions.map(a => ({ type: "two", action: a }: Action<InnerAction1, InnerAction2>)))
+        .concat(result2.actions.map(aa => ({ type: "two", action: (aa: InnerAction2) }: Action<InnerAction1, InnerAction2>)))
     );
   }
 

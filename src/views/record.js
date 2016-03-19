@@ -1,21 +1,18 @@
 // @flow
 
 const React = require('react');
+import type { View } from '../uiblocks-core/view';
 import type { Model } from '../blocks/record';
 
-function mkView(innerViews: { [key: string]: ((model: any) => React$Element) }): (model: Model) => React$Element {
-  function main(model: Model){
-    return (
+function mkView(innerViews: { [key: string]: View<any> }): View<Model> {
+  return (model: Model) => (
+    <div>
       <div>
-        <div>
-          {Object.keys(innerViews)
-                 .map(k => innerViews[k](model[k]))}
-        </div>
+        {Object.keys(innerViews)
+               .map(k => innerViews[k](model[k]))}
       </div>
-    );
-  }
-
-  return main;
+    </div>
+  );
 }
 
 module.exports = mkView;

@@ -1,27 +1,24 @@
 // @flow
 
 const React = require('react');
+import type { View } from '../uiblocks-core/view';
 import type { Model } from '../blocks/array';
 
-function mkView<InnerModel>(inner: (model: InnerModel) => React$Element): (model: Model<InnerModel>) => React$Element {
-  function main(model: Model<InnerModel>){
-    return (
+function mkView<InnerModel>(inner: View<InnerModel>): View<Model<InnerModel>> {
+  return (model: Model<InnerModel>) => (
+    <div>
+      <h2>Array</h2>
       <div>
-        <h2>Array</h2>
-        <div>
-          <button onClick={model.onAdd}>Add</button>
-        </div>
-        {model.rows.map(r => (
-          <div>
-            <button style={{display: "inline-block"}} onClick={r.onRemove}>X</button>
-            {inner(r.inner)}
-          </div>
-        ))}
+        <button onClick={model.onAdd}>Add</button>
       </div>
-    );
-  }
-
-  return main;
+      {model.rows.map(r => (
+        <div>
+          <button style={{display: "inline-block"}} onClick={r.onRemove}>X</button>
+          {inner(r.inner)}
+        </div>
+      ))}
+    </div>
+  );
 }
 
 module.exports = mkView;

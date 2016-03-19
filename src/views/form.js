@@ -2,6 +2,7 @@
 
 const React = require('react');
 const BS = require('react-bootstrap');
+import type { View } from '../uiblocks-core/view';
 import type { Model } from '../blocks/form';
 
 const toClickHandler: (handler: () => void) => ((ce: any) => bool) =
@@ -12,8 +13,8 @@ const toClickHandler: (handler: () => void) => ((ce: any) => bool) =
     return false;
   });
 
-function mkView<InnerModel, a>(inner: (model: InnerModel) => React$Element): (model: Model<InnerModel, a>) => React$Element {
-  function main(model: Model<InnerModel, a>){
+function mkView<InnerModel, a>(inner: View<InnerModel>): View<Model<InnerModel, a>> {
+  return (model: Model<InnerModel, a>) => {
     switch (model.type){
       case "Editing":
         return (
@@ -33,9 +34,7 @@ function mkView<InnerModel, a>(inner: (model: InnerModel) => React$Element): (mo
         );
       default: throw "unexpected";
     }
-  }
-
-  return main;
+  };
 }
 
 module.exports = mkView;

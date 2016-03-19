@@ -1,23 +1,20 @@
 // @flow
 
 const React = require('react');
+import type { View } from '../uiblocks-core/view';
 import type { Model } from '../blocks/tuple2';
 
-function mkView<InnerModel1, InnerModel2>(inner1: (model: InnerModel1) => React$Element, inner2: (model: InnerModel2) => React$Element): (model: Model<InnerModel1, InnerModel2>) => React$Element {
-  function main(model: Model<InnerModel1, InnerModel2>){
-    return (
+function mkView<InnerModel1, InnerModel2>(inner1: View<InnerModel1>, inner2: View<InnerModel2>): View<Model<InnerModel1, InnerModel2>> {
+  return (model: Model<InnerModel1, InnerModel2>) => (
+    <div>
       <div>
-        <div>
-          {inner1(model[0])}
-        </div>
-        <div>
-          {inner2(model[1])}
-        </div>
+        {inner1(model[0])}
       </div>
-    );
-  }
-
-  return main;
+      <div>
+        {inner2(model[1])}
+      </div>
+    </div>
+  );
 }
 
 module.exports = mkView;

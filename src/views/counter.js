@@ -1,16 +1,16 @@
 // @flow
 
 const React = require('react');
+import type { View } from '../uiblocks-core/view';
 import type { Model } from '../blocks/counter';
 
-function main(model: Model){
-  return (
+const view: View<Model> =
+  model => (
     <div>
       Current Value!: {model.value}
       <button onClick={model.onIncrement}>Up</button>
       <button onClick={model.onDecrement}>Down</button>
     </div>
   );
-}
 
-module.exports = main;
+module.exports = view;

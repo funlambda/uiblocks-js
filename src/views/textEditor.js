@@ -3,6 +3,7 @@
 const React = require('react');
 const BS = require('react-bootstrap');
 
+import type { View } from '../uiblocks-core/view';
 import type { Model } from '../blocks/textEditor';
 
 const toChangeHandler: (handler: (x: string) => void) => ((ce: any) => void) =
@@ -14,12 +15,10 @@ type Config = {
   bsStyle?: string
 }
 
-function main(config: Config): (m: Model) => React$Element {
-  return function(model: Model): React$Element {
-    return (
-      <BS.Input type="text" bsStyle={config.bsStyle} bsSize="medium" hasFeedback label={config.label} placeholder={config.placeholder} value={model.value} onChange={toChangeHandler(model.onChange)} />
-    );
-  }
+function mkView(config: Config): View<Model> {
+  return (model: Model) => (
+    <BS.Input type="text" bsStyle={config.bsStyle} bsSize="medium" hasFeedback label={config.label} placeholder={config.placeholder} value={model.value} onChange={toChangeHandler(model.onChange)} />
+  );
 }
 
-module.exports = main;
+module.exports = mkView;

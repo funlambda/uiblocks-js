@@ -11,6 +11,7 @@ const validation = require('../uiblocks-core/validation');
 const React = require("react");
 const BS = require('react-bootstrap');
 
+import type { View } from '../uiblocks-core/view';
 import type { Model as TextModel } from '../blocks/textEditor';
 import type { Model as ValueModel } from '../blocks/value';
 import type { Model as TouchedModel } from '../blocks/touched';
@@ -27,8 +28,8 @@ function validatedTouched<a, b>(inner: (validationStatus: any) => (model: b) => 
   }
 }
 
-function wrapInPanel<Model>(view: (m: Model) => React$Element){
-  return (m: Model): React$Element => (
+function wrapInPanel<Model>(view: View<Model>): View<Model>{
+  return (m: Model) => (
     <BS.Panel style={{width: 500}}>
       {view(m)}
     </BS.Panel>
