@@ -17,6 +17,7 @@ const tuple = require("./tuple");
 const record = require("./record");
 const touched = require("./touched");
 const form = require("./form");
+const chooser = require('./chooser');
 
 type Person = {
   name: string,
@@ -52,8 +53,15 @@ const stringEditor =
   )(textEditor);
 // Option<string> -> Validated<string>
 
+const colorOptions = [
+  { _id: "red", name: "Red" },
+  { _id: "green", name: "Green" },
+  { _id: "blue", name: "Blue" }
+];
+
 function buildRecordEditorBlock(spec: { [key: string]: Block }){
-  const block1 = record(spec);
+  const spec2 = _.mapValues(x => touched(value(x)))(spec);
+  const block1 = record(spec2);
   const block2 = block.adaptValue(validation.combineObject)(block1);
   const block3 = block.adaptInit(option.splitObject(...Object.keys(spec)))(block2);
   const block4 = value(block3);
@@ -64,10 +72,15 @@ function buildRecordEditorBlock(spec: { [key: string]: Block }){
   return block5;
 }
 
+// Option<string> -> Validated<string>
+const colorChooser =
+  block.adaptValue(validation.requireOption)(
+    chooser(colorOptions, o => o.name, o => o._id));
+
 const a = buildRecordEditorBlock({
-  name: touched(value(stringEditor)),
-  color: touched(value(stringEditor)),
-  age: touched(value(numberEditor))
+  name: stringEditor,
+  color: colorChooser,
+  age: numberEditor
 });
 
 const b = form(a,
@@ -77,4 +90,5 @@ const b = form(a,
   });
 
 module.exports = block.adaptInit((x: null) => option.None)(b);
+// module.exports = block.adaptInit((x: null) => option.Some({name: "Brooks", color: "blue", age: 31}))(b);
 // null -> Option<Person>

@@ -6,6 +6,7 @@ const value = require('./value');
 const record = require('./record');
 const form = require('./form');
 const touched = require('./touched');
+const chooser = require('./chooser');
 const block = require('../uiblocks-core/block');
 const validation = require('../uiblocks-core/validation');
 const React = require("react");
@@ -44,9 +45,9 @@ const a =
         value(
           record({
             name: validatedTouched((s) => textEditor({ bsStyle: s, label: "Name", placeholder: "Name" })),
-            color: validatedTouched((s) => textEditor({ bsStyle: s, label: "Favorite Color" })),
+            color: validatedTouched((s) => chooser({ bsStyle: s, label: "Favorite Color", noneLabel: "Select...", optionView: x => x })),
             age: validatedTouched((s) => textEditor({ bsStyle: s, label: "Age", placeholder: "Age" }))
-          })
+          }), true
         )
       )
     )

@@ -1,4 +1,4 @@
-// @flow
+// flow: disabled for now
 
 import type { Block } from '../uiblocks-core/block';
 import type { InitResult } from '../uiblocks-core/init-result';

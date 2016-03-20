@@ -1,3 +1,7 @@
+// @flow
+
+import type { Option } from './option';
+
 export type Validated<a> =
   { type: 'Invalid', messages: Array<string> }
   | { type: 'Valid', value: a }
@@ -84,15 +88,16 @@ export function validateAll<a>(v: a): Validated<a>{
   return { type: "Valid", value: v };
 }
 
-export const validateLength = (min: number, max: number) => (v: string): Validated<string> => {
-  const invalidMsgs =
-    (v.length < min ? [ "Too short" ] : [ ])
-    .concat((v.length > max ? [ "Too long" ] : [ ]));
+export const validateLength: (min: number, max: number) => (v: string) => Validated<string> =
+  (min: number, max: number) => (v: string): Validated<string> => {
+    const invalidMsgs =
+      (v.length < min ? [ "Too short" ] : [ ])
+      .concat((v.length > max ? [ "Too long" ] : [ ]));
 
-  return invalidMsgs.length > 0
-    ? { type: "Invalid", messages: invalidMsgs }
-    : { type: "Valid", value: v};
-};
+    return invalidMsgs.length > 0
+      ? { type: "Invalid", messages: invalidMsgs }
+      : { type: "Valid", value: v};
+  };
 
 export const validateNumber = (v: string): Validated<number> => {
   const number = parseFloat(v);
@@ -101,3 +106,13 @@ export const validateNumber = (v: string): Validated<number> => {
     ? { type: "Invalid", messages: [ "Number required" ] }
     : { type: "Valid", value: number };
 };
+
+export function requireOption<a>(v: Option<a>): Validated<a> {
+  switch (v.type){
+    case 'Some':
+      return { type: "Valid", value: v.value };
+    case 'None':
+      return { type: "Invalid", messages: ["Value required"]};
+    default: throw "unexpected";
+  }
+}
