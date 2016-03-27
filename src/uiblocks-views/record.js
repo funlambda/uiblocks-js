@@ -2,7 +2,7 @@
 
 const React = require('react');
 import type { View } from '../uiblocks-core/view';
-import type { Model } from '../blocks/record';
+import type { Model } from '../uiblocks-blocks/record';
 
 function mkView(innerViews: { [key: string]: View<any> }): View<Model> {
   return (model: Model) => (

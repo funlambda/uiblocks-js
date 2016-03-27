@@ -2,7 +2,7 @@
 
 const React = require('react');
 import type { View } from '../uiblocks-core/view';
-import type { Model } from '../blocks/counter';
+import type { Model } from '../uiblocks-blocks/counter';
 
 const view: View<Model> =
   model => (

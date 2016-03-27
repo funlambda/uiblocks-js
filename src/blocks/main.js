@@ -18,6 +18,7 @@ const record = require("../uiblocks-blocks/record");
 const touched = require("../uiblocks-blocks/touched");
 const form = require("../uiblocks-blocks/form");
 const chooser = require("../uiblocks-blocks/chooser");
+const delayValue = require("../uiblocks-blocks/delayValue");
 
 type Person = {
   name: string,
@@ -78,7 +79,7 @@ const colorChooser =
     chooser(colorOptions, o => o.name, o => o._id));
 
 const a = buildRecordEditorBlock({
-  name: stringEditor,
+  name: value(delayValue((a,s) => a.type == "Blur", stringEditor)),
   color: colorChooser,
   age: numberEditor
 });

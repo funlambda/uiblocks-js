@@ -4,7 +4,7 @@ const React = require('react');
 const BS = require('react-bootstrap');
 //import toClickHandler from '../uiblocks-core/view';
 import type { View } from '../uiblocks-core/view';
-import type { Model } from '../blocks/form';
+import type { Model } from '../uiblocks-blocks/form';
 
 function toClickHandler(handler: () => void): ((ce: any) => bool) {
   return ce => {

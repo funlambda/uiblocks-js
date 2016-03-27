@@ -9,10 +9,13 @@ type Init = string
 type State = string
 type Action =
   { type: "Change", value: string }
-  | { type: "Dummy" }
+  | { type: "Focus" }
+  | { type: "Blur" }
 export type Model = {
   value: string,
-  onChange: (x: string) => void
+  onChange: (x: string) => void,
+  onFocus: () => void,
+  onBlur: () => void
 }
 type Value = string
 
@@ -24,6 +27,10 @@ function handle(state: State, action: Action): InitResult<State, Action> {
   switch (action.type) {
     case 'Change':
       return initResult.mk(action.value);
+    case 'Focus':
+      return initResult.mk(state, []);
+    case 'Blur':
+      return initResult.mk(state, []);
     default: throw "unexpected";
   }
 }
@@ -31,7 +38,9 @@ function handle(state: State, action: Action): InitResult<State, Action> {
 function viewModel(state: State, dispatch: (a: Action) => void): Model {
   return {
     value: state,
-    onChange: (txt: string) => dispatch({ type: "Change", value: txt })
+    onChange: (txt: string) => dispatch({ type: "Change", value: txt }),
+    onFocus: () => dispatch({ type: "Focus" }),
+    onBlur: () => dispatch({ type: "Blur" }),
   }
 }
 

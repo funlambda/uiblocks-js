@@ -4,7 +4,7 @@ const React = require('react');
 const BS = require('react-bootstrap');
 const _ = require('lodash/fp');
 import type { View } from '../uiblocks-core/view';
-import type { Model } from '../blocks/chooser';
+import type { Model } from '../uiblocks-blocks/chooser';
 //import toClickHandler from '../uiblocks-core/view';
 
 function toClickHandler(handler: () => void): ((ce: any) => bool) {

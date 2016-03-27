@@ -44,7 +44,7 @@ const a =
       touched(
         value(
           record({
-            name: validatedTouched((s) => textEditor({ bsStyle: s, label: "Name", placeholder: "Name" })),
+            name: validatedTouched((s) => value(textEditor({ bsStyle: s, label: "Name", placeholder: "Name" }), true)),
             color: validatedTouched((s) => chooser({ bsStyle: s, label: "Favorite Color", noneLabel: "Select...", optionView: x => x })),
             age: validatedTouched((s) => textEditor({ bsStyle: s, label: "Age", placeholder: "Age" }))
           }), true

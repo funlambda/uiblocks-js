@@ -2,7 +2,7 @@
 
 const React = require('react');
 import type { View } from '../uiblocks-core/view';
-import type { Model } from '../blocks/tuple';
+import type { Model } from '../uiblocks-blocks/tuple';
 
 function mkView(...innerViews: Array<View<any>>): View<Model> {
   return (model: Model) => (
