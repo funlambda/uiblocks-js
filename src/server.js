@@ -37,7 +37,7 @@ http.createServer(function (req, res){
           const html2 =
             html.replace('<script id="statePlaceholder"></script>',
                          `<script>window._initialState = ${initialStateJSON};</script>`)
-                .replace('<div id="root">You don\'t have JavaScript installed! :(</div>',
+                .replace('<div id="root">You don\'t have JavaScript enabled! :(</div>',
                          `<div id="root">${initialElementHtml}</div>`);
 
           res.writeHead(200, "OK", { "Content-Type": "text/html" });

@@ -1,21 +1,21 @@
 // @flow
 
-const array = require('./array');
-const textEditor = require("./textEditor");
-const value = require('./value');
-const record = require('./record');
-const form = require('./form');
-const touched = require('./touched');
-const chooser = require('./chooser');
+const array = require('../uiblocks-views/array');
+const textEditor = require("../uiblocks-views/textEditor");
+const value = require('../uiblocks-views/value');
+const record = require('../uiblocks-views/record');
+const form = require('../uiblocks-views/form');
+const touched = require('../uiblocks-views/touched');
+const chooser = require('../uiblocks-views/chooser');
 const block = require('../uiblocks-core/block');
 const validation = require('../uiblocks-core/validation');
 const React = require("react");
 const BS = require('react-bootstrap');
 
 import type { View } from '../uiblocks-core/view';
-import type { Model as TextModel } from '../blocks/textEditor';
-import type { Model as ValueModel } from '../blocks/value';
-import type { Model as TouchedModel } from '../blocks/touched';
+import type { Model as TextModel } from '../uiblocks-blocks/textEditor';
+import type { Model as ValueModel } from '../uiblocks-blocks/value';
+import type { Model as TouchedModel } from '../uiblocks-blocks/touched';
 import type { Validated } from '../uiblocks-core/validation';
 
 const toChangeHandler: (handler: (x: string) => void) => ((ce: any) => void) =

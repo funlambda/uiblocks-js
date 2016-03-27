@@ -10,14 +10,14 @@ import * as validation from '../uiblocks-core/validation';
 
 var _ = require('lodash/fp');
 
-const textEditor = require("./textEditor");
-const array = require("./array");
-const value = require("./value");
-const tuple = require("./tuple");
-const record = require("./record");
-const touched = require("./touched");
-const form = require("./form");
-const chooser = require('./chooser');
+const textEditor = require("../uiblocks-blocks/textEditor");
+const array = require("../uiblocks-blocks/array");
+const value = require("../uiblocks-blocks/value");
+const tuple = require("../uiblocks-blocks/tuple");
+const record = require("../uiblocks-blocks/record");
+const touched = require("../uiblocks-blocks/touched");
+const form = require("../uiblocks-blocks/form");
+const chooser = require("../uiblocks-blocks/chooser");
 
 type Person = {
   name: string,

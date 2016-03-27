@@ -36346,6 +36346,159 @@ module.exports = warning;
 
 }).call(this,require('_process'))
 },{"_process":438}],416:[function(require,module,exports){
+"use strict";
+
+var _block = require("../uiblocks-core/block");
+
+var block = _interopRequireWildcard(_block);
+
+var _option = require("../uiblocks-core/option");
+
+var option = _interopRequireWildcard(_option);
+
+var _validation = require("../uiblocks-core/validation");
+
+var validation = _interopRequireWildcard(_validation);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var _ = require('lodash/fp');
+
+var textEditor = require("../uiblocks-blocks/textEditor");
+var array = require("../uiblocks-blocks/array");
+var value = require("../uiblocks-blocks/value");
+var tuple = require("../uiblocks-blocks/tuple");
+var record = require("../uiblocks-blocks/record");
+var touched = require("../uiblocks-blocks/touched");
+var form = require("../uiblocks-blocks/form");
+var chooser = require("../uiblocks-blocks/chooser");
+
+var numberEditor = _.flow(block.adaptInit(function (x) {
+  switch (x.type) {
+    case "Some":
+      return x.value.toString();
+    case "None":
+      return "";
+    default:
+      throw "unexpected";
+  }
+}), block.adaptValue(validation.validateNumber))(textEditor);
+// Option<number> -> Validated<number>
+
+var stringEditor = _.flow(block.adaptInit(function (x) {
+  switch (x.type) {
+    case "Some":
+      return x.value;
+    case "None":
+      return "";
+    default:
+      throw "unexpected";
+  }
+}), block.adaptValue(validation.validateLength(1, 20)))(textEditor);
+// Option<string> -> Validated<string>
+
+var colorOptions = [{ _id: "red", name: "Red" }, { _id: "green", name: "Green" }, { _id: "blue", name: "Blue" }];
+
+function buildRecordEditorBlock(spec) {
+  var spec2 = _.mapValues(function (x) {
+    return touched(value(x));
+  })(spec);
+  var block1 = record(spec2);
+  var block2 = block.adaptValue(validation.combineObject)(block1);
+  var block3 = block.adaptInit(option.splitObject.apply(option, _toConsumableArray(Object.keys(spec))))(block2);
+  var block4 = value(block3);
+  var block5 = touched(block4, Object.keys(spec).map(function (k) {
+    return { key: k, action: { type: "Touch" } };
+  }));
+
+  return block5;
+}
+
+// Option<string> -> Validated<string>
+var colorChooser = block.adaptValue(validation.requireOption)(chooser(colorOptions, function (o) {
+  return o.name;
+}, function (o) {
+  return o._id;
+}));
+
+var a = buildRecordEditorBlock({
+  name: stringEditor,
+  color: colorChooser,
+  age: numberEditor
+});
+
+var b = form(a, {
+  allowSubmit: validation.toOption,
+  actionsOnSubmitFail: [{ type: "Touch" }]
+});
+
+module.exports = block.adaptInit(function (x) {
+  return option.None;
+})(b);
+// module.exports = block.adaptInit((x: null) => option.Some({name: "Brooks", color: "blue", age: 31}))(b);
+// null -> Option<Person>
+},{"../uiblocks-blocks/array":418,"../uiblocks-blocks/chooser":419,"../uiblocks-blocks/form":420,"../uiblocks-blocks/record":421,"../uiblocks-blocks/textEditor":422,"../uiblocks-blocks/touched":423,"../uiblocks-blocks/tuple":424,"../uiblocks-blocks/value":425,"../uiblocks-core/block":426,"../uiblocks-core/option":428,"../uiblocks-core/validation":429,"lodash/fp":163}],417:[function(require,module,exports){
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _redux = require("redux");
+
+var view = require("./views/main");
+var block = require("./blocks/main");
+var ReactDOM = require("react-dom");
+
+
+function reducer(state, action) {
+  console.log("action:", action);
+
+  if (action.type == "blah") {
+    var _ret = function () {
+      var result = block.handle(state, action.action);
+      console.log("result", result);
+
+      // TODO: Do this more cleanly (a bit hackish as-is)
+      window.setTimeout(function () {
+        return result.actions.map(function (a) {
+          return store.dispatch({ type: 'blah', action: a });
+        });
+      }, 50);
+
+      return {
+        v: result.state
+      };
+    }();
+
+    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+  } else {
+    return state;
+  }
+}
+
+var result = block.initialize(null);
+console.log("initial result", result);
+var store = (0, _redux.createStore)(reducer, result.state);
+
+result.actions.map(function (a) {
+  return store.dispatch({ type: 'blah', action: a });
+});
+
+function renderState(state) {
+  var model = block.viewModel(state, function (a) {
+    return store.dispatch({ type: 'blah', action: a });
+  });
+  var elem = view(model);
+  ReactDOM.render(elem, document.getElementById('root'));
+}
+
+renderState(store.getState());
+
+store.subscribe(function () {
+  renderState(store.getState());
+});
+},{"./blocks/main":416,"./views/main":437,"react-dom":251,"redux":410}],418:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
@@ -36432,7 +36585,7 @@ function mkBlock(innerInitForNew, innerBlock) {
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],417:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],419:[function(require,module,exports){
 'use strict';
 
 var _fp = require('lodash/fp');
@@ -36512,7 +36665,7 @@ function mkBlock(options, toOptionModel, toValue) {
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427,"../uiblocks-core/option":428,"lodash/fp":163}],418:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427,"../uiblocks-core/option":428,"lodash/fp":163}],420:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
@@ -36615,101 +36768,7 @@ function mkBlock(innerBlock, config) {
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427,"../uiblocks-core/option":428}],419:[function(require,module,exports){
-"use strict";
-
-var _block = require("../uiblocks-core/block");
-
-var block = _interopRequireWildcard(_block);
-
-var _option = require("../uiblocks-core/option");
-
-var option = _interopRequireWildcard(_option);
-
-var _validation = require("../uiblocks-core/validation");
-
-var validation = _interopRequireWildcard(_validation);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var _ = require('lodash/fp');
-
-var textEditor = require("./textEditor");
-var array = require("./array");
-var value = require("./value");
-var tuple = require("./tuple");
-var record = require("./record");
-var touched = require("./touched");
-var form = require("./form");
-var chooser = require('./chooser');
-
-var numberEditor = _.flow(block.adaptInit(function (x) {
-  switch (x.type) {
-    case "Some":
-      return x.value.toString();
-    case "None":
-      return "";
-    default:
-      throw "unexpected";
-  }
-}), block.adaptValue(validation.validateNumber))(textEditor);
-// Option<number> -> Validated<number>
-
-var stringEditor = _.flow(block.adaptInit(function (x) {
-  switch (x.type) {
-    case "Some":
-      return x.value;
-    case "None":
-      return "";
-    default:
-      throw "unexpected";
-  }
-}), block.adaptValue(validation.validateLength(1, 20)))(textEditor);
-// Option<string> -> Validated<string>
-
-var colorOptions = [{ _id: "red", name: "Red" }, { _id: "green", name: "Green" }, { _id: "blue", name: "Blue" }];
-
-function buildRecordEditorBlock(spec) {
-  var spec2 = _.mapValues(function (x) {
-    return touched(value(x));
-  })(spec);
-  var block1 = record(spec2);
-  var block2 = block.adaptValue(validation.combineObject)(block1);
-  var block3 = block.adaptInit(option.splitObject.apply(option, _toConsumableArray(Object.keys(spec))))(block2);
-  var block4 = value(block3);
-  var block5 = touched(block4, Object.keys(spec).map(function (k) {
-    return { key: k, action: { type: "Touch" } };
-  }));
-
-  return block5;
-}
-
-// Option<string> -> Validated<string>
-var colorChooser = block.adaptValue(validation.requireOption)(chooser(colorOptions, function (o) {
-  return o.name;
-}, function (o) {
-  return o._id;
-}));
-
-var a = buildRecordEditorBlock({
-  name: stringEditor,
-  color: colorChooser,
-  age: numberEditor
-});
-
-var b = form(a, {
-  allowSubmit: validation.toOption,
-  actionsOnSubmitFail: [{ type: "Touch" }]
-});
-
-module.exports = block.adaptInit(function (x) {
-  return option.None;
-})(b);
-// module.exports = block.adaptInit((x: null) => option.Some({name: "Brooks", color: "blue", age: 31}))(b);
-// null -> Option<Person>
-},{"../uiblocks-core/block":426,"../uiblocks-core/option":428,"../uiblocks-core/validation":429,"./array":416,"./chooser":417,"./form":418,"./record":420,"./textEditor":421,"./touched":422,"./tuple":423,"./value":424,"lodash/fp":163}],420:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427,"../uiblocks-core/option":428}],421:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
@@ -36788,7 +36847,7 @@ function mkBlock(innerBlocks) {
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],421:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],422:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
@@ -36828,7 +36887,7 @@ function readValue(state) {
 }
 
 module.exports = block.mk(initialize, handle, viewModel, readValue);
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],422:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],423:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
@@ -36901,7 +36960,7 @@ function mkBlock(innerBlock, actionsOnTouch) {
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],423:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],424:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
@@ -36972,7 +37031,7 @@ function mkBlock() {
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],424:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],425:[function(require,module,exports){
 'use strict';
 
 var _block = require('../uiblocks-core/block');
@@ -36998,66 +37057,7 @@ function mkBlock(innerBlock) {
 }
 
 module.exports = mkBlock;
-},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],425:[function(require,module,exports){
-"use strict";
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-var _redux = require("redux");
-
-var view = require("./views/main");
-var block = require("./blocks/main");
-var ReactDOM = require("react-dom");
-
-
-function reducer(state, action) {
-  console.log("action:", action);
-
-  if (action.type == "blah") {
-    var _ret = function () {
-      var result = block.handle(state, action.action);
-      console.log("result", result);
-
-      // TODO: Do this more cleanly (a bit hackish as-is)
-      window.setTimeout(function () {
-        return result.actions.map(function (a) {
-          return store.dispatch({ type: 'blah', action: a });
-        });
-      }, 50);
-
-      return {
-        v: result.state
-      };
-    }();
-
-    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
-  } else {
-    return state;
-  }
-}
-
-var result = block.initialize(null);
-console.log("initial result", result);
-var store = (0, _redux.createStore)(reducer, result.state);
-
-result.actions.map(function (a) {
-  return store.dispatch({ type: 'blah', action: a });
-});
-
-function renderState(state) {
-  var model = block.viewModel(state, function (a) {
-    return store.dispatch({ type: 'blah', action: a });
-  });
-  var elem = view(model);
-  ReactDOM.render(elem, document.getElementById('root'));
-}
-
-renderState(store.getState());
-
-store.subscribe(function () {
-  renderState(store.getState());
-});
-},{"./blocks/main":419,"./views/main":433,"react-dom":251,"redux":410}],426:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/init-result":427}],426:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -37513,13 +37513,100 @@ module.exports = mkView;
 },{"react":404,"react-bootstrap":240}],433:[function(require,module,exports){
 'use strict';
 
-var array = require('./array');
-var textEditor = require("./textEditor");
-var value = require('./value');
-var record = require('./record');
-var form = require('./form');
-var touched = require('./touched');
-var chooser = require('./chooser');
+var React = require('react');
+
+
+function mkView(innerViews) {
+  return function (model) {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        'div',
+        null,
+        Object.keys(innerViews).map(function (k) {
+          return innerViews[k](model[k]);
+        })
+      )
+    );
+  };
+}
+
+module.exports = mkView;
+},{"react":404}],434:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var BS = require('react-bootstrap');
+
+var toChangeHandler = function toChangeHandler(handler) {
+  return function (ce) {
+    return handler(ce.target.value);
+  };
+};
+
+function mkView(config) {
+  return function (model) {
+    return React.createElement(BS.Input, { type: 'text', bsStyle: config.bsStyle, bsSize: 'medium', hasFeedback: true, label: config.label, placeholder: config.placeholder, value: model.value, onChange: toChangeHandler(model.onChange) });
+  };
+}
+
+module.exports = mkView;
+},{"react":404,"react-bootstrap":240}],435:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+
+function mkView(inner, debug) {
+  return function (model) {
+    return debug ? React.createElement(
+      'span',
+      null,
+      inner(model.Inner),
+      React.createElement(
+        'pre',
+        { style: { display: "inline-block" } },
+        'IsTouched == ',
+        JSON.stringify(model.IsTouched)
+      )
+    ) : inner(model.Inner);
+  };
+}
+
+module.exports = mkView;
+},{"react":404}],436:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+
+function mkView(inner, debug) {
+  return function (model) {
+    return debug ? React.createElement(
+      'span',
+      null,
+      inner(model.Inner),
+      React.createElement(
+        'pre',
+        { style: { display: "inline-block" } },
+        JSON.stringify(model.Value)
+      )
+    ) : inner(model.Inner);
+  };
+}
+
+module.exports = mkView;
+},{"react":404}],437:[function(require,module,exports){
+'use strict';
+
+var array = require('../uiblocks-views/array');
+var textEditor = require("../uiblocks-views/textEditor");
+var value = require('../uiblocks-views/value');
+var record = require('../uiblocks-views/record');
+var form = require('../uiblocks-views/form');
+var touched = require('../uiblocks-views/touched');
+var chooser = require('../uiblocks-views/chooser');
 var block = require('../uiblocks-core/block');
 var validation = require('../uiblocks-core/validation');
 var React = require("react");
@@ -37563,94 +37650,7 @@ var a = wrapInPanel(form(touched(value(record({
 }), true))));
 
 module.exports = a;
-},{"../uiblocks-core/block":426,"../uiblocks-core/validation":429,"./array":430,"./chooser":431,"./form":432,"./record":434,"./textEditor":435,"./touched":436,"./value":437,"react":404,"react-bootstrap":240}],434:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-
-function mkView(innerViews) {
-  return function (model) {
-    return React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'div',
-        null,
-        Object.keys(innerViews).map(function (k) {
-          return innerViews[k](model[k]);
-        })
-      )
-    );
-  };
-}
-
-module.exports = mkView;
-},{"react":404}],435:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var BS = require('react-bootstrap');
-
-var toChangeHandler = function toChangeHandler(handler) {
-  return function (ce) {
-    return handler(ce.target.value);
-  };
-};
-
-function mkView(config) {
-  return function (model) {
-    return React.createElement(BS.Input, { type: 'text', bsStyle: config.bsStyle, bsSize: 'medium', hasFeedback: true, label: config.label, placeholder: config.placeholder, value: model.value, onChange: toChangeHandler(model.onChange) });
-  };
-}
-
-module.exports = mkView;
-},{"react":404,"react-bootstrap":240}],436:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-
-function mkView(inner, debug) {
-  return function (model) {
-    return debug ? React.createElement(
-      'span',
-      null,
-      inner(model.Inner),
-      React.createElement(
-        'pre',
-        { style: { display: "inline-block" } },
-        'IsTouched == ',
-        JSON.stringify(model.IsTouched)
-      )
-    ) : inner(model.Inner);
-  };
-}
-
-module.exports = mkView;
-},{"react":404}],437:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-
-function mkView(inner, debug) {
-  return function (model) {
-    return debug ? React.createElement(
-      'span',
-      null,
-      inner(model.Inner),
-      React.createElement(
-        'pre',
-        { style: { display: "inline-block" } },
-        JSON.stringify(model.Value)
-      )
-    ) : inner(model.Inner);
-  };
-}
-
-module.exports = mkView;
-},{"react":404}],438:[function(require,module,exports){
+},{"../uiblocks-core/block":426,"../uiblocks-core/validation":429,"../uiblocks-views/array":430,"../uiblocks-views/chooser":431,"../uiblocks-views/form":432,"../uiblocks-views/record":433,"../uiblocks-views/textEditor":434,"../uiblocks-views/touched":435,"../uiblocks-views/value":436,"react":404,"react-bootstrap":240}],438:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -37742,4 +37742,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[425]);
+},{}]},{},[417]);
