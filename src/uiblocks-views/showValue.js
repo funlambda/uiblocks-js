@@ -2,11 +2,15 @@
 
 const React = require('react');
 import type { View } from '../uiblocks-core/view';
-import type { Model } from '../uiblocks-blocks/value';
+import type { Model } from '../uiblocks-blocks/showValue';
 
-function mkView<InnerModel, InnerValue>(inner: View<InnerModel>, debug?: boolean): View<Model<InnerModel, InnerValue>> {
-  return (model: Model<InnerModel, InnerValue>) => (
-    debug
+type Config = {
+  debug?: bool,
+}
+
+function mkView<InnerModel, InnerValue>(cfg: Config): (inner: View<InnerModel>) => View<Model<InnerModel, InnerValue>> {
+  return (inner: View<InnerModel>) => (model: Model<InnerModel, InnerValue>) => (
+    cfg.debug
       ? (
         <span>
           {inner(model.Inner)}

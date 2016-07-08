@@ -1,12 +1,21 @@
 {
+  "private": true,
   "name": "uiblocks-js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "UI Blocks for JS (Redux)",
-  "main": "out/server.js",
-  "author": "",
-  "license": "ISC",
   "scripts": {
-    "build": "babel src -d out"
+    "start": "webpack-dev-server --inline --hot",
+    "build": "webpack -p --progress"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [
+      "transform-object-rest-spread",
+      "transform-function-bind"
+    ]
   },
   "dependencies": {
     "lodash": "^4.6.1",
@@ -17,8 +26,15 @@
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-rest-spread": "^6.6.5",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "browserify": "^13.0.0"
+    "fable-import-react": "^0.0.6",
+    "redbox-react": "^1.2.2",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
   }
 }

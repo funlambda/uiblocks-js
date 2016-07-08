@@ -4,9 +4,13 @@ const React = require('react');
 import type { View } from '../uiblocks-core/view';
 import type { Model } from '../uiblocks-blocks/touched';
 
-function mkView<InnerModel>(inner: View<InnerModel>, debug?: boolean): View<Model<InnerModel>> {
-  return (model: Model<InnerModel>) => (
-    debug
+type Config = {
+  debug?: bool
+}
+
+function mkView<InnerConfig, InnerModel>(cfg: Config): (inner: View<InnerModel>) => View<Model<InnerModel>> {
+  return (inner: View<InnerModel>) => (model: Model<InnerModel>) => (
+    cfg.debug
       ? (
           <span>
             {inner(model.Inner)}

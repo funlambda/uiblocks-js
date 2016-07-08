@@ -24,78 +24,78 @@ type Config<InnerAction, InnerValue, a> = {
   actionsOnSubmitFail: Array<InnerAction>
 }
 
-function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue, a>(
-    innerBlock: Block<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>,
-    config: Config<InnerAction, InnerValue, a>)
-    : Block<InnerInit, State<InnerState, a>, Action<InnerAction>, Model<InnerModel, a>, Value<a>> {
+function mkBlock<InnerInit, InnerState, InnerAction, InnerModel, InnerValue, a>(config: Config<InnerAction, InnerValue, a>):
+    (block: Block<InnerInit, InnerState, InnerAction, InnerModel, InnerValue>) => Block<InnerInit, State<InnerState, a>, Action<InnerAction>, Model<InnerModel, a>, Value<a>> {
 
-  function initialize(init: InnerInit): InitResult<State<InnerState, a>, Action<InnerAction>> {
-    return initResult.map(
-      s => ({ type: "Editing", inner: s}),
-      a => ({ type: "Inner", action: a }))
-      (innerBlock.initialize(init));
-  }
-
-  function handle(state: State<InnerState, a>, action: Action<InnerAction>): InitResult<State<InnerState, a>, Action<InnerAction>> {
-    switch (action.type) {
-      case 'Inner':
-        switch (state.type) {
-          case 'Editing':
-            return initResult.map(
-              s => ({ type: "Editing", inner: s}),
-              a => ({ type: "Inner", action: a }))
-            (innerBlock.handle(state.inner, action.action));
-          default: throw "unexpected";
-        }
-      case 'Submit':
-        switch (state.type) {
-          case 'Editing':
-            const result = config.allowSubmit(innerBlock.readValue(state.inner));
-            switch (result.type){
-              case 'Some':
-                return initResult.mk({ type: "Submitted", value: result.value });
-              case 'None':
-                const actions = config.actionsOnSubmitFail.map(a => ({ type: "Inner", action: a }));
-
-                return initResult.mk({ type: "Editing", inner: state.inner }, actions);
-              default: throw "unexpected";
-            }
-          default: throw "unexpected";
-        }
-      default: throw "unexpected";
+  return innerBlock => {
+    function initialize(init: InnerInit): InitResult<State<InnerState, a>, Action<InnerAction>> {
+      return initResult.map(
+        s => ({ type: "Editing", inner: s}),
+        a => ({ type: "Inner", action: a }))
+        (innerBlock.initialize(init));
     }
-  }
 
-  function viewModel(state: State<InnerState, a>, dispatch: (a: Action<InnerAction>) => void): Model {
-    switch (state.type){
-      case "Editing":
-        return {
-          type: "Editing",
-          form: {
-            Inner: innerBlock.viewModel(state.inner, a => dispatch({type: "Inner", action: a})),
-            OnSubmit: () => dispatch({ type: "Submit" })
+    function handle(state: State<InnerState, a>, action: Action<InnerAction>): InitResult<State<InnerState, a>, Action<InnerAction>> {
+      switch (action.type) {
+        case 'Inner':
+          switch (state.type) {
+            case 'Editing':
+              return initResult.map(
+                s => ({ type: "Editing", inner: s}),
+                a => ({ type: "Inner", action: a }))
+              (innerBlock.handle(state.inner, action.action));
+            default: throw "unexpected";
           }
-        };
-      case "Submitted":
-        return {
-          type: "Submitted",
-          value: state.value
-        };
-      default: throw "unexpected";
-    }
-  }
+        case 'Submit':
+          switch (state.type) {
+            case 'Editing':
+              const result = config.allowSubmit(innerBlock.readValue(state.inner));
+              switch (result.type){
+                case 'Some':
+                  return initResult.mk({ type: "Submitted", value: result.value });
+                case 'None':
+                  const actions = config.actionsOnSubmitFail.map(a => ({ type: "Inner", action: a }));
 
-  function readValue(state: State): Value<a> {
-    switch (state.type){
-      case "Editing":
-        return option.None;
-      case "Submitted":
-        return option.Some(state.value);
-      default: throw "unexpected";
+                  return initResult.mk({ type: "Editing", inner: state.inner }, actions);
+                default: throw "unexpected";
+              }
+            default: throw "unexpected";
+          }
+        default: throw "unexpected";
+      }
     }
-  }
 
-  return block.mk(initialize, handle, viewModel, readValue);
+    function viewModel(state: State<InnerState, a>, dispatch: (a: Action<InnerAction>) => void): Model {
+      switch (state.type){
+        case "Editing":
+          return {
+            type: "Editing",
+            form: {
+              Inner: innerBlock.viewModel(state.inner, a => dispatch({type: "Inner", action: a})),
+              OnSubmit: () => dispatch({ type: "Submit" })
+            }
+          };
+        case "Submitted":
+          return {
+            type: "Submitted",
+            value: state.value
+          };
+        default: throw "unexpected";
+      }
+    }
+
+    function readValue(state: State): Value<a> {
+      switch (state.type){
+        case "Editing":
+          return option.None;
+        case "Submitted":
+          return option.Some(state.value);
+        default: throw "unexpected";
+      }
+    }
+
+    return block.mk(initialize, handle, viewModel, readValue);
+  };
 }
 
 module.exports = mkBlock;

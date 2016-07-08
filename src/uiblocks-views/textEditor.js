@@ -15,12 +15,13 @@ const toHandler: (handler: () => void) => ((ce: any) => void) =
 type Config = {
   placeholer?: string,
   label?: string,
-  bsStyle?: string
+  bsStyle?: string,
+  style?: any
 }
 
 function mkView(config: Config): View<Model> {
   return (model: Model) => (
-    <BS.Input type="text" bsStyle={config.bsStyle} bsSize="medium" hasFeedback label={config.label}
+    <BS.Input type="text" bsStyle={config.bsStyle} style={config.style} bsSize="medium" hasFeedback label={config.label}
               placeholder={config.placeholder} value={model.value}
               onChange={toChangeHandler(model.onChange)}
               onBlur={toHandler(model.onBlur)}

@@ -1,56 +1,32 @@
 // @flow
 
-const array = require('../uiblocks-views/array');
-const textEditor = require("../uiblocks-views/textEditor");
-const value = require('../uiblocks-views/value');
-const record = require('../uiblocks-views/record');
-const form = require('../uiblocks-views/form');
-const touched = require('../uiblocks-views/touched');
-const chooser = require('../uiblocks-views/chooser');
-const block = require('../uiblocks-core/block');
-const validation = require('../uiblocks-core/validation');
-const React = require("react");
-const BS = require('react-bootstrap');
+import { array, textEditor, record, form, chooser } from "../uiblocks-views/index";
+import * as Helpers from '../uiblocks-views/helpers';
 
-import type { View } from '../uiblocks-core/view';
-import type { Model as TextModel } from '../uiblocks-blocks/textEditor';
-import type { Model as ValueModel } from '../uiblocks-blocks/value';
-import type { Model as TouchedModel } from '../uiblocks-blocks/touched';
-import type { Validated } from '../uiblocks-core/validation';
+const React = require('react');
 
-const toChangeHandler: (handler: (x: string) => void) => ((ce: any) => void) =
-  handler => (ce => handler(ce.target.value));
-
-
-function validatedTouched<a, b>(inner: (validationStatus: any) => (model: b) => React$Element) {
-  return (model: TouchedModel<ValueModel<b, Validated<a>>>): React$Element => {
-    const validationStatus = model.IsTouched && model.Inner.Value.type == "Invalid" ? "error" : null;
-    return inner(validationStatus)(model.Inner.Inner);
-  }
+function wrapInDiv(style, inner) {
+  return model =>
+    <div style={style}>
+      {inner(model)}
+    </div>;
 }
 
-function wrapInPanel<Model>(view: View<Model>): View<Model>{
-  return (m: Model) => (
-    <BS.Panel style={{width: 500}}>
-      {view(m)}
-    </BS.Panel>
+const numberArrayEditor =
+  Helpers.arrayEditor({})(
+    { view: a => wrapInDiv({ width: 30 }, textEditor(a)), attr: { placeholder: "Lucky Number" }, invalidMap: s => ({ bsStyle: s }) }
   );
-}
 
-
-const a =
-  wrapInPanel(
+const b =
+  Helpers.wrapInPanel(
     form(
-      touched(
-        value(
-          record({
-            name: validatedTouched((s) => value(textEditor({ bsStyle: s, label: "Name", placeholder: "Name" }), true)),
-            color: validatedTouched((s) => chooser({ bsStyle: s, label: "Favorite Color", noneLabel: "Select...", optionView: x => x })),
-            age: validatedTouched((s) => textEditor({ bsStyle: s, label: "Age", placeholder: "Age" }))
-          }), true
-        )
-      )
+      Helpers.recordEditor({
+        name: { view: textEditor, attr: { label: "Name", placeholder: "Name" }, invalidMap: s => ({ bsStyle: s }) },
+        favoriteColor: { view: chooser, attr: { label: "Favorite", noneLabel: "Select...", optionView: x => x }, invalidMap: s => ({ bsStyle: s }) },
+        age: { view: textEditor, attr: { label: "Age", placeholder: "Age" }, invalidMap: s => ({ bsStyle: s }) },
+        luckyNumbers: { view: a => numberArrayEditor, attr: { label: "what" }, invalidMap: s => ({}) }
+      })
     )
   );
 
-module.exports = a;
+module.exports = b;
